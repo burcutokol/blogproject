@@ -13,8 +13,16 @@ namespace BlogProject
         protected void Page_Load(object sender, EventArgs e)
         {
             var Blogs = db.TBLBLOG.ToList();
-            Repeater1.DataSource= Blogs;
+            Repeater1.DataSource = Blogs;
             Repeater1.DataBind();
+
+            var Categories = db.TBLKATEGORI.ToList();
+            categories.DataSource = Categories;
+            categories.DataBind();
+
+            var LatestBlogs = db.TBLBLOG.ToList();
+            latestblogs.DataSource = LatestBlogs;
+            latestblogs.DataBind();
         }
     }
 }

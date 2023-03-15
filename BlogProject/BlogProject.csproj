@@ -50,6 +50,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -75,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BlogDetails.aspx" />
     <Content Include="DefaultPage.aspx" />
     <Content Include="Entity\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -100,7 +102,6 @@
     <Content Include="web\images\man.jpg" />
     <Content Include="web\images\more.png" />
     <Content Include="web\images\okuyalım.com.png" />
-    <Content Include="web\images\okuyalım.com.ico" />
     <Content Include="web\images\post1.jpg" />
     <Content Include="web\images\post2.jpg" />
     <Content Include="web\images\post3.jpg" />
@@ -114,6 +115,13 @@
     <Content Include="web\Yeni Metin Belgesi.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogDetails.aspx.cs">
+      <DependentUpon>BlogDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BlogDetails.aspx.designer.cs">
+      <DependentUpon>BlogDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DefaultPage.aspx.cs">
       <DependentUpon>DefaultPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
