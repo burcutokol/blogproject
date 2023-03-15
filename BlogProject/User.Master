@@ -7,7 +7,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Personal Blog a Blogging Category Flat Bootstarp  Responsive Website Template | Home :: w3layouts</title>
+	<title>okuyalım.com</title>
+	<link rel="shortcut icon" href="web/images/favicon.ico" type="image/x-icon">
 	<link href="web/css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link href="web/css/style.css" rel='stylesheet' type='text/css' />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +43,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">  
 	 <div class="container">
 		  <div class="logo">
-			  <a href="index.html"><img src="web/images/logo.jpg" title="" /></a>
+			  <a href="DefaultPage.aspx"><img src="web/images/okuyalım.com.png" title="" style ="width:200px; height:170px"/></a>
 		  </div>
 			 <!---start-top-nav---->
 			 <div class="top-menu">
