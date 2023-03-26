@@ -19,7 +19,7 @@ namespace BlogProject.Entity
         public string YORUM { get; set; }
         public int KITAPID { get; set; }
         public Nullable<int> PUAN { get; set; }
-        public int BLOGYORUMID { get; set; }
+        public string KULLANICIAD { get; set; }
     
         public virtual TBLBLOG TBLBLOG { get; set; }
     }

@@ -40,7 +40,7 @@
           <Property Name="YORUM" Type="varchar" MaxLength="4000" />
           <Property Name="KITAPID" Type="int" Nullable="false" />
           <Property Name="PUAN" Type="int" />
-          <Property Name="BLOGYORUMID" Type="int" Nullable="false" />
+          <Property Name="KULLANICIAD" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_TBLBLOG_TBL_TUR">
           <End Role="TBL_TUR" Type="Self.TBL_TUR" Multiplicity="0..1" />
@@ -74,7 +74,7 @@
               <PropertyRef Name="BLOGID" />
             </Principal>
             <Dependent Role="TBLYORUM">
-              <PropertyRef Name="BLOGYORUMID" />
+              <PropertyRef Name="KITAPID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -141,7 +141,7 @@
           <Property Name="YORUM" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="KITAPID" Type="Int32" Nullable="false" />
           <Property Name="PUAN" Type="Int32" />
-          <Property Name="BLOGYORUMID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICIAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBLYORUM_TBLBLOG" FromRole="TBLYORUM" ToRole="TBLBLOG" />
         </EntityType>
         <Association Name="FK_TBLBLOG_TBL_TUR">
@@ -176,7 +176,7 @@
               <PropertyRef Name="BLOGID" />
             </Principal>
             <Dependent Role="TBLYORUM">
-              <PropertyRef Name="BLOGYORUMID" />
+              <PropertyRef Name="KITAPID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,7 +241,7 @@
                 <ScalarProperty Name="YORUM" ColumnName="YORUM" />
                 <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
                 <ScalarProperty Name="PUAN" ColumnName="PUAN" />
-                <ScalarProperty Name="BLOGYORUMID" ColumnName="BLOGYORUMID" />
+                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

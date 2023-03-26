@@ -47,7 +47,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="single-grid">
                         <asp:Repeater ID="BlogDetail" runat="server">
                             <ItemTemplate>
-                                <img src="<%#Eval ("BLOGGORSEL") %> " alt="" style="height: 400px; width: 300px; margin-bottom:20px" />
+                                <img src="<%#Eval ("BLOGGORSEL") %> " alt="" style="height: 400px; width: 300px; margin-bottom: 20px" />
                                 <h3><%#Eval("BLOGBASLIK")%></h3>
                                 <p>
                                     <%#Eval("BLOGICERIK") %>
@@ -56,16 +56,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </asp:Repeater>
 
                     </div>
-                    <ul class="comment-list">
-                        <h5 class="post-author_head">Written by <a href="#" title="Posts by admin" rel="author">admin</a></h5>
-                        <li>
-                            <img src="web/images/avatar.png" class="img-responsive" alt="">
-                            <div class="desc">
-                                <p>View all posts by: <a href="#" title="Posts by admin" rel="author">admin</a></p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
+                    <asp:Repeater ID="CommentList" runat="server">
+
+                        <ItemTemplate>
+                            <ul class="comment-list">
+                                <li>
+                                    <img src="web/images/avatar.png" class="img-responsive" alt="">
+                                    <div class="desc">
+                                        <p><%#Eval("KULLANICIAD") %>  : <%#Eval("YORUM") %>  </p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </li>
+                            </ul>
+
+                            
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+
                     <div class="content-form">
                         <h3>Leave a comment</h3>
                         <form>

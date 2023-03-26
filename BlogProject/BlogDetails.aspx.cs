@@ -17,6 +17,10 @@ namespace BlogProject
             var Blog = db.TBLBLOG.Where(x=>x.BLOGID==Blog_Id).ToList();
             BlogDetail.DataSource= Blog;
             BlogDetail.DataBind();
+
+            var Comments = db.TBLYORUM.Where(x=>x.KITAPID==Blog_Id).ToList();
+            CommentList.DataSource= Comments;
+            CommentList.DataBind();
         }
     }
 }
