@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="project_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="project_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBL_TUR">
           <Key>
             <PropertyRef Name="TURID" />
@@ -23,6 +23,28 @@
           <Property Name="BLOGGORSEL" Type="varchar" MaxLength="200" />
           <Property Name="BLOGKATEGORİ" Type="tinyint" />
           <Property Name="BLOGTURID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'project_blog.dbo.TBLHAKKIMIZDA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TBLHAKKIMIZDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACIKLAMA" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'project_blog.dbo.TBLILETISIM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TBLILETISIM">
+          <Key>
+            <PropertyRef Name="MESAJID" />
+          </Key>
+          <Property Name="MESAJID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADSOYAD" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAIL" Type="nvarchar" MaxLength="75" />
+          <Property Name="TELEFON" Type="nvarchar" MaxLength="50" />
+          <Property Name="KONU" Type="nchar" MaxLength="100" />
+          <Property Name="ICERIK" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="TBLKATEGORI">
           <Key>
@@ -83,6 +105,22 @@
           <EntitySet Name="TBLBLOG" EntityType="Self.TBLBLOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLKATEGORI" EntityType="Self.TBLKATEGORI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TBLHAKKIMIZDA].[ID] AS [ID], 
+    [TBLHAKKIMIZDA].[ACIKLAMA] AS [ACIKLAMA]
+    FROM [dbo].[TBLHAKKIMIZDA] AS [TBLHAKKIMIZDA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TBLILETISIM].[MESAJID] AS [MESAJID], 
+    [TBLILETISIM].[ADSOYAD] AS [ADSOYAD], 
+    [TBLILETISIM].[MAIL] AS [MAIL], 
+    [TBLILETISIM].[TELEFON] AS [TELEFON], 
+    [TBLILETISIM].[KONU] AS [KONU], 
+    [TBLILETISIM].[ICERIK] AS [ICERIK]
+    FROM [dbo].[TBLILETISIM] AS [TBLILETISIM]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_TBLBLOG_TBL_TUR" Association="Self.FK_TBLBLOG_TBL_TUR">
             <End Role="TBL_TUR" EntitySet="TBL_TUR" />
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
@@ -96,8 +134,7 @@
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="project_blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -197,7 +234,27 @@
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
+          <EntitySet Name="TBLHAKKIMIZDA" EntityType="project_blogModel.TBLHAKKIMIZDA" />
+          <EntitySet Name="TBLILETISIM" EntityType="project_blogModel.TBLILETISIM" />
         </EntityContainer>
+        <EntityType Name="TBLHAKKIMIZDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLILETISIM">
+          <Key>
+            <PropertyRef Name="MESAJID" />
+          </Key>
+          <Property Name="MESAJID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADSOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KONU" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="ICERIK" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -242,6 +299,26 @@
                 <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
                 <ScalarProperty Name="PUAN" ColumnName="PUAN" />
                 <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLHAKKIMIZDA">
+            <EntityTypeMapping TypeName="project_blogModel.TBLHAKKIMIZDA">
+              <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLILETISIM">
+            <EntityTypeMapping TypeName="project_blogModel.TBLILETISIM">
+              <MappingFragment StoreEntitySet="TBLILETISIM">
+                <ScalarProperty Name="ICERIK" ColumnName="ICERIK" />
+                <ScalarProperty Name="KONU" ColumnName="KONU" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
+                <ScalarProperty Name="MESAJID" ColumnName="MESAJID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

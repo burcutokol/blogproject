@@ -12,6 +12,8 @@
         <AssociationConnector Association="project_blogModel.FK_TBLBLOG_TBL_TUR" ManuallyRouted="false" />
         <AssociationConnector Association="project_blogModel.FK_TBLBLOG_TBLKATEGORI" ManuallyRouted="false" />
         <AssociationConnector Association="project_blogModel.FK_TBLYORUM_TBLBLOG" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="project_blogModel.TBLHAKKIMIZDA" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="project_blogModel.TBLILETISIM" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

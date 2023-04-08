@@ -63,7 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <li>
                                     <img src="web/images/avatar.png" class="img-responsive" alt="">
                                     <div class="desc">
-                                        <p><%#Eval("KULLANICIAD") %>  : <%#Eval("YORUM") %>  </p>
+                                        <p style="font-weight : bolder"><%#Eval("KULLANICIAD") %> </p> : <p> <%#Eval("YORUM") %>  </p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </li>
@@ -75,13 +75,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </asp:Repeater>
 
                     <div class="content-form">
-                        <h3>Leave a comment</h3>
-                        <form>
-                            <input type="text" placeholder="Name" required />
-                            <input type="text" placeholder="Email" required />
-                            <input type="text" placeholder="Phone" required />
-                            <textarea placeholder="Message"></textarea>
-                            <input type="submit" value="SEND" />
+                        <h3>Bir Yorum Yazın.</h3>
+                        <form runat="server">
+                            <asp:TextBox ID="Name" runat="server"
+                                placeholder = "Adınız">
+                            </asp:TextBox>
+                            <asp:TextBox ID="Mail" runat="server"
+                                placeholder = "Mail Adresiniz" required="">
+                            </asp:TextBox>
+                            <asp:TextBox ID="Comment" runat="server" TextMode="MultiLine" Height="100"
+                                placeholder = "Yorumunuz">
+                            </asp:TextBox>
+                            <asp:Button ID="btnSave" runat="server" Text="Yorum Yap" OnClick="Button1_Click" />
+                            
                         </form>
                     </div>
                 </div>

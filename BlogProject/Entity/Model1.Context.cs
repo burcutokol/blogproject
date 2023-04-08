@@ -29,5 +29,7 @@ namespace BlogProject.Entity
         public virtual DbSet<TBLBLOG> TBLBLOG { get; set; }
         public virtual DbSet<TBLKATEGORI> TBLKATEGORI { get; set; }
         public virtual DbSet<TBLYORUM> TBLYORUM { get; set; }
+        public virtual DbSet<TBLHAKKIMIZDA> TBLHAKKIMIZDA { get; set; }
+        public virtual DbSet<TBLILETISIM> TBLILETISIM { get; set; }
     }
 }
