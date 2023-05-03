@@ -26,6 +26,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!--script-->
 <script type="text/javascript" src="web/js/move-top.js"></script>
 <script type="text/javascript" src="web/js/easing.js"></script>
+	<script>
+        function openPopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "block";
+        }
+
+        function closePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+    </script>
 <!--/script-->
 <script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -34,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
 				});
 			});
-</script>
+</script> 
 <!---->
 
 </head>

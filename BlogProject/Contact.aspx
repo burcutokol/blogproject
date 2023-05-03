@@ -14,7 +14,7 @@
 				 <asp:TextBox ID="Phone" runat="server" placeholder="Telefon Numarası" required=""></asp:TextBox>
 				 <asp:TextBox ID="Topic" runat="server" placeholder="Konu" required=""></asp:TextBox>
 				 <asp:TextBox ID="TextBox" runat="server" placeholder="Mesajınız" required="" TextMode="MultiLine" Height="100"></asp:TextBox>
-				 <button type="submit" value="GÖNDER"/>
+				 <asp:Button ID="Button1" runat="server" type="submit" text="GÖNDER" OnClick="Button1_Click"/>
 			 </form>
 		  </div>
 		  <div class="contact-details">
