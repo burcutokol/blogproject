@@ -33,12 +33,12 @@
                         <td><%#Eval("BLOGKATEGORİ") %></td>
 
                         <td><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%#"DeleteBlog.aspx?BLOGID=" + Eval("BLOGID") %>' CssClass="btn btn-danger" OnClick="deleteButton_Click">Sil</asp:HyperLink></td>
-                        <td><a href ="#" class ="btn btn-warning">Güncelle</a></td>
+                        <td><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%#"UpdateBlog.aspx?BLOGID=" + Eval("BLOGID") %>' CssClass="btn btn-warning" OnClick="updateButton_Click">Güncelle</asp:HyperLink></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
         </tr>
     </table>
-    <a href ="NewBlog.aspx" class ="btn btn-primary">Yeni Blog Ekle</a>i,
+    <a href ="NewBlog.aspx" class ="btn btn-primary">Yeni Blog Ekle</a>
     
 </asp:Content>

@@ -77,9 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AboutPage.aspx" />
-    <Content Include="AdminPages\Blogs.aspx" />
-    <Content Include="AdminPages\DeleteBlog.aspx" />
-    <Content Include="AdminPages\NewBlog.aspx" />
+    <Content Include="AdminPages\Blogs\Blogs.aspx" />
+    <Content Include="AdminPages\Blogs\DeleteBlog.aspx" />
+    <Content Include="AdminPages\CommentList\Comments.aspx" />
+    <Content Include="AdminPages\CommentList\DeleteComment.aspx" />
+    <Content Include="AdminPages\Blogs\NewBlog.aspx" />
+    <Content Include="AdminPages\Blogs\UpdateBlog.aspx" />
+    <Content Include="AdminPages\CommentList\UpdateComment.aspx" />
     <Content Include="BlogDetails.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="DefaultPage.aspx" />
@@ -134,26 +138,54 @@
     <Compile Include="Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="AdminPages\Blogs.aspx.cs">
+    <Compile Include="AdminPages\Blogs\Blogs.aspx.cs">
       <DependentUpon>Blogs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminPages\Blogs.aspx.designer.cs">
+    <Compile Include="AdminPages\Blogs\Blogs.aspx.designer.cs">
       <DependentUpon>Blogs.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminPages\DeleteBlog.aspx.cs">
+    <Compile Include="AdminPages\Blogs\DeleteBlog.aspx.cs">
       <DependentUpon>DeleteBlog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminPages\DeleteBlog.aspx.designer.cs">
+    <Compile Include="AdminPages\Blogs\DeleteBlog.aspx.designer.cs">
       <DependentUpon>DeleteBlog.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminPages\NewBlog.aspx.cs">
+    <Compile Include="AdminPages\CommentList\Comments.aspx.cs">
+      <DependentUpon>Comments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\CommentList\Comments.aspx.designer.cs">
+      <DependentUpon>Comments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\CommentList\DeleteComment.aspx.cs">
+      <DependentUpon>DeleteComment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\CommentList\DeleteComment.aspx.designer.cs">
+      <DependentUpon>DeleteComment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\Blogs\NewBlog.aspx.cs">
       <DependentUpon>NewBlog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminPages\NewBlog.aspx.designer.cs">
+    <Compile Include="AdminPages\Blogs\NewBlog.aspx.designer.cs">
       <DependentUpon>NewBlog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\Blogs\UpdateBlog.aspx.cs">
+      <DependentUpon>UpdateBlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Blogs\UpdateBlog.aspx.designer.cs">
+      <DependentUpon>UpdateBlog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\CommentList\UpdateComment.aspx.cs">
+      <DependentUpon>UpdateComment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\CommentList\UpdateComment.aspx.designer.cs">
+      <DependentUpon>UpdateComment.aspx</DependentUpon>
     </Compile>
     <Compile Include="BlogDetails.aspx.cs">
       <DependentUpon>BlogDetails.aspx</DependentUpon>

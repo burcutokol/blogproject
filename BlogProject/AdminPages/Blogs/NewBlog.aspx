@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="NewBlog.aspx.cs" Inherits="BlogProject.AdminPages.NewBlog" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server" class="form-group"> 
+    <div>
+        <form runat="server" class="form-group"> 
         <asp:TextBox ID="TextBox1" runat="server" placeholder= "Blog Başlık" CssClass="form-control"></asp:TextBox>
         <br />
         <asp:TextBox ID="TextBox2" runat="server" placeholder= "Blog Tarih" CssClass="form-control"></asp:TextBox>
@@ -15,6 +16,8 @@
         <br />
         <asp:Button ID="Button1" runat="server" Text="Kaydet" CssClass="btn btn-success" OnClick="Button1_Click1" />
     </form>
+    </div>
+    
 
     <div id="myModal" class="modal" style="display:none">
       <div class="modal-dialog">
