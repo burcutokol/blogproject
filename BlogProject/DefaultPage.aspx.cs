@@ -20,9 +20,14 @@ namespace BlogProject
             categories.DataSource = Categories;
             categories.DataBind();
 
-            var LatestBlogs = db.TBLBLOG.ToList();
+            var LatestBlogs = db.TBLBLOG.OrderByDescending(x => x.BLOGTARIH).ToList(); ;
             latestblogs.DataSource = LatestBlogs;
             latestblogs.DataBind();
+        }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
         }
     }
 }

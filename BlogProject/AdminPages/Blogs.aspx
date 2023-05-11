@@ -31,12 +31,14 @@
                         <td><%#Eval("BLOGTARIH") %></td>
                         <td><%#Eval("BLOGTURID") %></td>
                         <td><%#Eval("BLOGKATEGORİ") %></td>
-                        <td><a href ="#" class ="btn btn-danger">Sil</a></td>
+
+                        <td><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%#"DeleteBlog.aspx?BLOGID=" + Eval("BLOGID") %>' CssClass="btn btn-danger" OnClick="deleteButton_Click">Sil</asp:HyperLink></td>
                         <td><a href ="#" class ="btn btn-warning">Güncelle</a></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
         </tr>
     </table>
-    <a href ="NewBlog.aspx" class ="btn btn-primary">Yeni Blog Ekle</a>
+    <a href ="NewBlog.aspx" class ="btn btn-primary">Yeni Blog Ekle</a>i,
+    
 </asp:Content>

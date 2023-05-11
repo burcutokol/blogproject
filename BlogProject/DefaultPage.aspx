@@ -45,7 +45,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-md-8" style="padding-right: 50px; padding-left: 50px">
-                    <asp:Repeater ID="Repeater1" runat="server">
+                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                         <ItemTemplate>
                             <div class="content-grid" style="align-content: center;">
                                 <div class="content-grid-info">
@@ -53,7 +53,8 @@
                                     <div class="post-info" style="width: 500px">
                                         <h4><a href="BlogDetails.aspx?BLOGID=<%#Eval("BLOGID")%>"><%#Eval("BLOGBASLIK") %></a> <%#Eval("BLOGTARIH") %></h4>
                                         <p><%#Eval("BLOGICERIK") %></p>
-                                        <a href="BlogDetails.aspx"><span></span>Devamını Oku</a>
+
+                                        <a href="BlogDetails.aspx?BLOGID=<%#Eval("BLOGID")%>"><span></span>Devamını Oku</a>
                                     </div>
                                 </div>
                             </div>

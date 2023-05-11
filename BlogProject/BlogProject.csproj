@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="AboutPage.aspx" />
     <Content Include="AdminPages\Blogs.aspx" />
+    <Content Include="AdminPages\DeleteBlog.aspx" />
     <Content Include="AdminPages\NewBlog.aspx" />
     <Content Include="BlogDetails.aspx" />
     <Content Include="Contact.aspx" />
@@ -139,6 +140,13 @@
     </Compile>
     <Compile Include="AdminPages\Blogs.aspx.designer.cs">
       <DependentUpon>Blogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPages\DeleteBlog.aspx.cs">
+      <DependentUpon>DeleteBlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\DeleteBlog.aspx.designer.cs">
+      <DependentUpon>DeleteBlog.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPages\NewBlog.aspx.cs">
       <DependentUpon>NewBlog.aspx</DependentUpon>

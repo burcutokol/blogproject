@@ -31,12 +31,14 @@ namespace BlogProject
             {
                 t.KULLANICIAD = Name.Text;
                 t.YORUM = Comment.Text;
-                t.KITAPID= Blog_Id; 
+                t.KITAPID = Blog_Id;
                 db.TBLYORUM.Add(t); //Db'nin TBLYORUM tablosuna yeni t objesini ekledim.
                 db.SaveChanges();
                 Response.Redirect("BlogDetails.Aspx?BLOGID=" + Blog_Id);
             }
 
         }
+       
+
     }
 }
