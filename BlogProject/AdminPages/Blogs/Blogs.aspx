@@ -39,6 +39,6 @@
             </asp:Repeater>
         </tr>
     </table>
-    <a href ="NewBlog.aspx" class ="btn btn-primary">Yeni Blog Ekle</a>
+    <a href ="/AdminPages/Blogs/NewBlog.aspx/" class ="btn btn-primary">Yeni Blog Ekle</a>
     
 </asp:Content>

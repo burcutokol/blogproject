@@ -84,7 +84,9 @@
     <Content Include="AdminPages\Blogs\NewBlog.aspx" />
     <Content Include="AdminPages\Blogs\UpdateBlog.aspx" />
     <Content Include="AdminPages\CommentList\UpdateComment.aspx" />
+    <Content Include="AdminPages\Statistics.aspx" />
     <Content Include="BlogDetails.aspx" />
+    <Content Include="CategoryDetails.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="DefaultPage.aspx" />
     <Content Include="Entity\Model1.Context.tt">
@@ -187,12 +189,26 @@
     <Compile Include="AdminPages\CommentList\UpdateComment.aspx.designer.cs">
       <DependentUpon>UpdateComment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\Statistics.aspx.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Statistics.aspx.designer.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BlogDetails.aspx.cs">
       <DependentUpon>BlogDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BlogDetails.aspx.designer.cs">
       <DependentUpon>BlogDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryDetails.aspx.cs">
+      <DependentUpon>CategoryDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CategoryDetails.aspx.designer.cs">
+      <DependentUpon>CategoryDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

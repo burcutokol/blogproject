@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="DefaultPage.aspx.cs" Inherits="BlogProject.DefaultPage" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="CategoryDetails.aspx.cs" Inherits="BlogProject.CategoryDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="content">
+     <div class="content">
         <div class="container">
             <div class="content-grids">
                 <div class="col-md-2 content-left">
@@ -44,10 +43,11 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="col-md-8" style="padding-right: 50px; padding-left: 50px; text-align: center;">
-                    <asp:Repeater ID="Repeater1" runat="server">
+                <div class="col-md-8" style="padding-right: 50px; padding-left: 50px">
+                    <asp:Label ID="Label1" runat="server" CssClass="center-block text-center h2" ></asp:Label>
+                    <asp:Repeater ID="Repeater1" runat="server" >
                         <ItemTemplate>
-                            <div class="content-grid" style="align-content:baseline;">
+                            <div class="content-grid" style="align-content: center;">
                                 <div class="content-grid-info">
                                     <img src="<%#Eval ("BLOGGORSEL") %> " alt="" style="height: 250px; width: 500px" />
                                     <div class="post-info" style="width: 500px">
@@ -68,7 +68,7 @@
                         <ul>
                             <asp:Repeater ID="latestblogs" runat="server">
                                 <ItemTemplate>
-                                    <li><a href="BlogDetails.aspx?BLOGID=<%#Eval("BLOGID")%>"><%#Eval("BLOGBASLIK") %></a></li>
+                                    <li><a href="#"><%#Eval("BLOGBASLIK") %></a></li>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </ul>
@@ -76,13 +76,9 @@
                     <div class="comments">
                         <h3>SON YORUMLAR</h3>
                         <ul>
-                            <asp:Repeater ID="latestcomments" runat="server">
-                                <ItemTemplate>
-                                    <li><a href="BlogDetails.aspx?KITAPID=<%#Eval("KITAPID")%>"><%#Eval("KULLANICIAD") %> -  <%#Eval("YORUM") %></a></li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                            
-                            
+                            <li><a href="#">Amada Doe </a>on <a href="#">Hello World!</a></li>
+                            <li><a href="#">Peter Doe </a>on <a href="#">Photography</a></li>
+                            <li><a href="#">Steve Roberts  </a>on <a href="#">HTML5/CSS3</a></li>
                         </ul>
                     </div>
                     <div class="clearfix"></div>
@@ -98,7 +94,7 @@
                         <ul>
                             <asp:Repeater ID="categories" runat="server">
                                 <ItemTemplate>
-                                    <li><a href="CategoryDetails.aspx?BLOGID=<%#Eval("KATEGORIID")%>"><%#Eval("KATEGORIAD") %></a></li>
+                                    <li><a href="CategoryDetails.aspx?KATEGORIID=<%#Eval("KATEGORIID")%>"><%#Eval("KATEGORIAD") %></a></li>
 
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -111,4 +107,6 @@
             </div>
         </div>
     </div>
+
+
 </asp:Content>

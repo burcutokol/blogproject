@@ -20,13 +20,14 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-        <a href="Blogs.aspx"><img src="/web/images/okuyalım.com.png" title="okuyalım.com" style ="width:120px; height:70px"/></a>	  
+        <a href="/AdminPages/Blogs/Blogs.aspx/"><img src="/web/images/okuyalım.com.png" title="okuyalım.com" style ="width:120px; height:70px"/></a>	  
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/AdminPages/Blogs/Blogs.aspx/">Bloglar</a></li>
       <li><a href="/AdminPages/CommentList/Comments.aspx/">Yorumlar</a></li>
       <li><a href="#">Mesajlar</a></li>
       <li><a href="#">Hakkımızda</a></li>
+        <li><a href="/AdminPages/Statistics.aspx">İstatistikler</a></li>
     </ul>
   </div>
 </nav>
