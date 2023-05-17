@@ -23,16 +23,6 @@
                             <li><a href="#">Steve Roberts  </a>on <a href="#">HTML5/CSS3</a></li>
                         </ul>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="archives">
-                        <h3>ARŞİV</h3>
-                        <ul>
-                            <li><a href="#">October 2013</a></li>
-                            <li><a href="#">September 2013</a></li>
-                            <li><a href="#">August 2013</a></li>
-                            <li><a href="#">July 2013</a></li>
-                        </ul>
-                    </div>
                     <div class="categories">
                         <h3>KATEGORİLER</h3>
                         <ul>
@@ -42,7 +32,6 @@
                             <li><a href="#">Cras iaculis ultricies</a></li>
                         </ul>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
                 <div class="col-md-8" style="padding-right: 50px; padding-left: 50px; text-align: center;">
                     <asp:Repeater ID="Repeater1" runat="server">
@@ -78,7 +67,7 @@
                         <ul>
                             <asp:Repeater ID="latestcomments" runat="server">
                                 <ItemTemplate>
-                                    <li><a href="BlogDetails.aspx?KITAPID=<%#Eval("KITAPID")%>"><%#Eval("KULLANICIAD") %> -  <%#Eval("YORUM") %></a></li>
+                                    <li><a href="BlogDetails.aspx?BLOGID=<%#Eval("BlogId")%>"><%#Eval("KullanıcıAd") %> -  <%#Eval("Yorum") %>...</a></li>
                                 </ItemTemplate>
                             </asp:Repeater>
                             
@@ -86,13 +75,7 @@
                         </ul>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="archives">
-                        <h3>ARŞİV</h3>
-                        <ul>
-                            <li><a href="#">October 2013</a></li>
-                            <li><a href="#">September 2013</a></li>
-                        </ul>
-                    </div>
+                    
                     <div class="categories">
                         <h3>KATEGORİLER</h3>
                         <ul>

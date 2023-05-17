@@ -33,6 +33,7 @@ namespace BlogProject.Entity
         public virtual DbSet<TBLYORUM> TBLYORUM { get; set; }
         public virtual DbSet<TBLHAKKIMIZDA> TBLHAKKIMIZDA { get; set; }
         public virtual DbSet<TBLILETISIM> TBLILETISIM { get; set; }
+        public virtual DbSet<TBLADMIN> TBLADMIN { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
