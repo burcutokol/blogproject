@@ -33,7 +33,19 @@ namespace BlogProject
             latestblogs.DataSource = LatestBlogs;
             latestblogs.DataBind();
 
-            
+            var LatestComments = db.TBLYORUM
+            .OrderByDescending(x => x.TBLBLOG.BLOGTARIH)
+            .AsEnumerable()
+            .Select(y => new {
+                Yorum = y.YORUM.Substring(0, Math.Min(y.YORUM.Length, 40)),
+                BlogId = y.KITAPID,
+                KullanıcıAd = y.KULLANICIAD,
+
+            }).ToList().Take(5);
+            latestcomments.DataSource = LatestComments;
+            latestcomments.DataBind();
+
+
 
         }
     }

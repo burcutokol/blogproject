@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="project_blogModel.TBLHAKKIMIZDA" Width="1.5" PointX="5.375" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="project_blogModel.TBLILETISIM" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="project_blogModel.TBLADMIN" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="project_blogModel.TBLKULLANICI" Width="1.5" PointX="7.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

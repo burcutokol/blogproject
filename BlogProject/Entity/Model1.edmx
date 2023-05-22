@@ -59,6 +59,17 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="KATEGORIID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KATEGORIAD" Type="varchar" MaxLength="40" />
         </EntityType>
+        <EntityType Name="TBLKULLANICI">
+          <Key>
+            <PropertyRef Name="KULLANICIID" />
+          </Key>
+          <Property Name="KULLANICIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KULLANICINICK" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KULLANICIAD" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KULLANICISOYAD" Type="nvarchar" MaxLength="20" />
+          <Property Name="KULLANICISIFRE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KULLANICIMAIL" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="TBLYORUM">
           <Key>
             <PropertyRef Name="YORUMID" />
@@ -143,6 +154,7 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLKATEGORI" EntityType="Self.TBLKATEGORI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLKULLANICI" EntityType="Self.TBLKULLANICI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -297,6 +309,7 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="TBLADMIN" EntityType="project_blogModel.TBLADMIN" />
+          <EntitySet Name="TBLKULLANICI" EntityType="project_blogModel.TBLKULLANICI" />
         </EntityContainer>
         <EntityType Name="TBLHAKKIMIZDA">
           <Key>
@@ -334,6 +347,17 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KULLANICIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SIFRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBLKULLANICI">
+          <Key>
+            <PropertyRef Name="KULLANICIID" />
+          </Key>
+          <Property Name="KULLANICIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANICINICK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KULLANICIAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KULLANICISOYAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KULLANICISIFRE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KULLANICIMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -432,6 +456,18 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
                 <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
                 <ScalarProperty Name="KULLANICIADI" ColumnName="KULLANICIADI" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKULLANICI">
+            <EntityTypeMapping TypeName="project_blogModel.TBLKULLANICI">
+              <MappingFragment StoreEntitySet="TBLKULLANICI">
+                <ScalarProperty Name="KULLANICIMAIL" ColumnName="KULLANICIMAIL" />
+                <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
+                <ScalarProperty Name="KULLANICISOYAD" ColumnName="KULLANICISOYAD" />
+                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+                <ScalarProperty Name="KULLANICINICK" ColumnName="KULLANICINICK" />
+                <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -22,6 +22,7 @@
       <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
    </head>
    <body>
+      
       <div class="mid-class">
          <div class="art-right-w3ls">
             <h2>Giriş Yap</h2>
@@ -90,8 +91,11 @@
          </div>
          <div class="art-left-w3ls">
             <h1 class="header-w3ls">
-               okuyalım.com
-               <p>Giriş Yap ve Üye Ol</p>
+                <div class="container" style="width:fit-content">
+		  <div class="logo">
+			  <a href="DefaultPage.aspx"><img src="web/images/okuyalım.combw.png" title="" style ="width:200px; height:170px"/></a>
+		  </div>			
+	 </div>
             </h1>
          </div>
       </div>

@@ -13,11 +13,23 @@ namespace BlogProject
         protected void Page_Load(object sender, EventArgs e)
         {
             int Comment_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
-            var Blogs = db.TBLBLOG.ToList();
+            var Blogs = db.TBLBLOG
+            .OrderByDescending(x => x.BLOGTARIH)
+            .AsEnumerable()
+            .Select(y => new {
+                BLOGICERIK = y.BLOGICERIK.Substring(0, Math.Min(y.BLOGICERIK.Length, 200)),
+                BLOGID = y.BLOGID,
+                BLOGBASLIK = y.BLOGBASLIK,
+                BLOGTARIH = y.BLOGTARIH,
+                BLOGGORSEL = y.BLOGGORSEL,
+                BLOGKATEGORİ = y.BLOGKATEGORİ,
+                BLOGTURID = y.BLOGTURID,
+
+            }).ToList().Take(5);
             Repeater1.DataSource = Blogs;
             Repeater1.DataBind();
 
-            var Categories = db.TBLKATEGORI.ToList();
+            var Categories = db.TBLKATEGORI.ToList();  
             categories.DataSource = Categories;
             categories.DataBind();
 

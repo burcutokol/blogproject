@@ -18,14 +18,14 @@ namespace BlogProject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var userQuery = from x in db.TBLADMIN
-                            where x.KULLANICIADI == userName.Text
-                            && x.SIFRE == password.Text
+            var userQuery = from x in db.TBLKULLANICI
+                            where x.KULLANICINICK == userName.Text
+                            && x.KULLANICISIFRE == password.Text
                             select x; 
             if(userQuery.Any())
             {
                 Session.Add("KULLANICIADI", userName.Text); //Yönlenen sayfada kontrol et
-                Response.Redirect("/AdminPages/Blogs/Blogs.aspx");
+                Response.Redirect("DefaultPage.aspx");
             }
             else
             {

@@ -267,6 +267,7 @@
     <Compile Include="Entity\TBLKATEGORI.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\TBLKULLANICI.cs" />
     <Compile Include="Entity\TBLYORUM.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
