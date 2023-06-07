@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlogProject.Entity;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BlogProject.Entity;
 namespace BlogProject.AdminPages
 {
     public partial class NewBlog : System.Web.UI.Page
     {
-        
+
         project_blogEntities1 db = new project_blogEntities1();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,14 +39,14 @@ namespace BlogProject.AdminPages
                 DropDownList2.DataTextField = "KATEGORIAD";
                 DropDownList2.DataBind();
             }
-                
+
         }
 
-      
+
         protected void Button1_Click1(object sender, EventArgs e)
         {
             TBLBLOG blog = new TBLBLOG();
-            
+
 
             if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "")
             {

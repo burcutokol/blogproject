@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlogProject.Entity;
+using System;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using BlogProject.Entity;
 namespace BlogProject
 {
     public partial class AboutPage : System.Web.UI.Page
@@ -13,7 +10,7 @@ namespace BlogProject
         protected void Page_Load(object sender, EventArgs e)
         {
             AboutRepeater.DataSource = db.TBLHAKKIMIZDA.ToList();
-            AboutRepeater.DataBind();   
+            AboutRepeater.DataBind();
         }
     }
 }

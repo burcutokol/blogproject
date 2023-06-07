@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -51,6 +54,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -89,17 +93,20 @@
     <Content Include="CategoryDetails.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="DefaultPage.aspx" />
+    <Content Include="DefaultPagewAccount.aspx" />
     <Content Include="Entity\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Entity\Model1.edmx.sql" />
     <Content Include="Entity\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Login.aspx" />
+    <Content Include="UserAccount.aspx" />
     <Content Include="Web.config" />
     <Content Include="web2\css\bootstrap.css" />
     <Content Include="web2\css\style.css" />
@@ -107,7 +114,6 @@
     <Content Include="web2\images\background.png" />
     <Content Include="web2\images\background2.png" />
     <Content Include="web2\index.html" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="web\about.html" />
     <Content Include="web\contact.html" />
     <Content Include="web\css\bootstrap.css" />
@@ -231,6 +237,13 @@
     <Compile Include="DefaultPage.aspx.designer.cs">
       <DependentUpon>DefaultPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DefaultPagewAccount.aspx.cs">
+      <DependentUpon>DefaultPagewAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultPagewAccount.aspx.designer.cs">
+      <DependentUpon>DefaultPagewAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,12 +302,12 @@
     <Compile Include="User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="UserAccount.aspx.cs">
+      <DependentUpon>UserAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="UserAccount.aspx.designer.cs">
+      <DependentUpon>UserAccount.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -318,7 +331,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="profile\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

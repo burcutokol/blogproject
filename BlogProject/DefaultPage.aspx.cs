@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlogProject.Entity;
+using System;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using BlogProject.Entity;
 namespace BlogProject
 {
     public partial class DefaultPage : System.Web.UI.Page
@@ -16,7 +13,8 @@ namespace BlogProject
             var Blogs = db.TBLBLOG
             .OrderByDescending(x => x.BLOGTARIH)
             .AsEnumerable()
-            .Select(y => new {
+            .Select(y => new
+            {
                 BLOGICERIK = y.BLOGICERIK.Substring(0, Math.Min(y.BLOGICERIK.Length, 200)),
                 BLOGID = y.BLOGID,
                 BLOGBASLIK = y.BLOGBASLIK,
@@ -29,7 +27,7 @@ namespace BlogProject
             Repeater1.DataSource = Blogs;
             Repeater1.DataBind();
 
-            var Categories = db.TBLKATEGORI.ToList();  
+            var Categories = db.TBLKATEGORI.ToList();
             categories.DataSource = Categories;
             categories.DataBind();
 
@@ -40,7 +38,8 @@ namespace BlogProject
             var LatestComments = db.TBLYORUM
             .OrderByDescending(x => x.TBLBLOG.BLOGTARIH)
             .AsEnumerable()
-            .Select(y => new {
+            .Select(y => new
+            {
                 Yorum = y.YORUM.Substring(0, Math.Min(y.YORUM.Length, 40)),
                 BlogId = y.KITAPID,
                 KullanıcıAd = y.KULLANICIAD,
@@ -51,10 +50,10 @@ namespace BlogProject
 
             int BlogId = Convert.ToInt32(Request.QueryString["BlogId"]);
             var Blog = db.TBLBLOG.Find(BlogId);
-            
+
 
         }
 
-        
+
     }
 }

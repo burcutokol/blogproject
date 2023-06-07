@@ -61,9 +61,9 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
         </EntityType>
         <EntityType Name="TBLKULLANICI">
           <Key>
-            <PropertyRef Name="KULLANICIID" />
+            <PropertyRef Name="KULLANICIID_" />
           </Key>
-          <Property Name="KULLANICIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KULLANICIID_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KULLANICINICK" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="KULLANICIAD" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="KULLANICISOYAD" Type="nvarchar" MaxLength="20" />
@@ -74,10 +74,10 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Key>
             <PropertyRef Name="YORUMID" />
           </Key>
-          <Property Name="YORUMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="KULLANICIID" Type="int" Nullable="false" />
+          <Property Name="YORUMID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANICIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="YORUM" Type="varchar" MaxLength="4000" />
-          <Property Name="KITAPID" Type="int" Nullable="false" />
+          <Property Name="KITAPID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PUAN" Type="int" />
           <Property Name="KULLANICIAD" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -114,6 +114,18 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
             </Principal>
             <Dependent Role="TBLYORUM">
               <PropertyRef Name="KITAPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLYORUM_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBLYORUM" Type="Self.TBLYORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBLYORUM">
+              <PropertyRef Name="KULLANICIID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -175,6 +187,10 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBLYORUM_TBLKULLANICI" Association="Self.FK_TBLYORUM_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBLYORUM" EntitySet="TBLYORUM" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -197,11 +213,12 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="BLOGICERIK" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="BLOGTARIH" Type="DateTime" Precision="0" />
           <Property Name="BLOGGORSEL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BLOGKATEGORİ" Type="Byte" />
+          <Property Name="BLOGKATEGORİ" Type="Byte" Nullable="false" />
           <Property Name="BLOGTURID" Type="Int32" />
           <NavigationProperty Name="TBL_TUR" Relationship="Self.FK_TBLBLOG_TBL_TUR" FromRole="TBLBLOG" ToRole="TBL_TUR" />
           <NavigationProperty Name="TBLKATEGORI" Relationship="Self.FK_TBLBLOG_TBLKATEGORI" FromRole="TBLBLOG" ToRole="TBLKATEGORI" />
           <NavigationProperty Name="TBLYORUM" Relationship="Self.FK_TBLYORUM_TBLBLOG" FromRole="TBLBLOG" ToRole="TBLYORUM" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="project_blogModel.TBL_BEGENIBLOG" FromRole="TBLBLOG" ToRole="TBLKULLANICI" />
         </EntityType>
         <EntityType Name="TBLKATEGORI">
           <Key>
@@ -222,6 +239,7 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="PUAN" Type="Int32" />
           <Property Name="KULLANICIAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBLYORUM_TBLBLOG" FromRole="TBLYORUM" ToRole="TBLBLOG" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="project_blogModel.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLYORUM" ToRole="TBLKULLANICI" />
         </EntityType>
         <Association Name="FK_TBLBLOG_TBL_TUR">
           <End Role="TBL_TUR" Type="Self.TBL_TUR" Multiplicity="0..1" />
@@ -309,7 +327,109 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="TBLADMIN" EntityType="project_blogModel.TBLADMIN" />
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(project_blogModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
           <EntitySet Name="TBLKULLANICI" EntityType="project_blogModel.TBLKULLANICI" />
+          <AssociationSet Name="FK_TBLYORUM_TBLKULLANICI" Association="project_blogModel.FK_TBLYORUM_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBLYORUM" EntitySet="TBLYORUM" />
+          </AssociationSet>
+          <AssociationSet Name="TBL_BEGENIBLOG" Association="project_blogModel.TBL_BEGENIBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition2" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams2" ReturnType="Collection(project_blogModel.sp_helpdiagrams2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams2" />
+          <AssociationSet Name="TBL_BEGENIBLOG1" Association="project_blogModel.TBL_BEGENIBLOG1">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition3" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams3" ReturnType="Collection(project_blogModel.sp_helpdiagrams3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams3" />
         </EntityContainer>
         <EntityType Name="TBLHAKKIMIZDA">
           <Key>
@@ -348,98 +468,183 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="KULLANICIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SIFRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="TBLKULLANICI">
           <Key>
-            <PropertyRef Name="KULLANICIID" />
+            <PropertyRef Name="KULLANICIID_" />
           </Key>
-          <Property Name="KULLANICIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANICIID_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KULLANICINICK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="KULLANICIAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="KULLANICISOYAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="KULLANICISIFRE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="KULLANICIMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBLYORUM" Relationship="project_blogModel.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBLYORUM" />
+          <NavigationProperty Name="TBLBLOG" Relationship="project_blogModel.TBL_BEGENIBLOG" FromRole="TBLKULLANICI" ToRole="TBLBLOG" />
         </EntityType>
+        <Association Name="FK_TBLYORUM_TBLKULLANICI">
+          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="1" />
+          <End Type="project_blogModel.TBLYORUM" Role="TBLYORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBLYORUM">
+              <PropertyRef Name="KULLANICIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TBL_BEGENIBLOG">
+          <End Type="project_blogModel.TBLBLOG" Role="TBLBLOG" Multiplicity="*" />
+          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition2_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams2_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="TBL_BEGENIBLOG1">
+          <End Type="project_blogModel.TBLBLOG" Role="TBLBLOG" Multiplicity="*" />
+          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition3_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams3_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="project_blogModelStoreContainer" CdmEntityContainer="project_blogEntities1">
-          <EntitySetMapping Name="TBL_TUR">
-            <EntityTypeMapping TypeName="project_blogModel.TBL_TUR">
-              <MappingFragment StoreEntitySet="TBL_TUR">
-                <ScalarProperty Name="TURID" ColumnName="TURID" />
-                <ScalarProperty Name="TURAD" ColumnName="TURAD" />
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="project_blogModelStoreContainer" CdmEntityContainer="project_blogEntities1">
+    <EntitySetMapping Name="TBL_TUR">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBL_TUR)">
+        <MappingFragment StoreEntitySet="TBL_TUR">
+          <ScalarProperty Name="TURID" ColumnName="TURID" />
+          <ScalarProperty Name="TURAD" ColumnName="TURAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLBLOG">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLBLOG)">
+        <MappingFragment StoreEntitySet="TBLBLOG">
+          <ScalarProperty Name="BLOGID" ColumnName="BLOGID" />
+          <ScalarProperty Name="BLOGBASLIK" ColumnName="BLOGBASLIK" />
+          <ScalarProperty Name="BLOGICERIK" ColumnName="BLOGICERIK" />
+          <ScalarProperty Name="BLOGTARIH" ColumnName="BLOGTARIH" />
+          <ScalarProperty Name="BLOGGORSEL" ColumnName="BLOGGORSEL" />
+          <ScalarProperty Name="BLOGKATEGORİ" ColumnName="BLOGKATEGORİ" />
+          <ScalarProperty Name="BLOGTURID" ColumnName="BLOGTURID" />
+        </MappingFragment>
+              <MappingFragment StoreEntitySet="TBL_TUR" >
+                <ScalarProperty Name="BLOGTURID" ColumnName="TURID" />
               </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLBLOG">
-            <EntityTypeMapping TypeName="project_blogModel.TBLBLOG">
-              <MappingFragment StoreEntitySet="TBLBLOG">
-                <ScalarProperty Name="BLOGID" ColumnName="BLOGID" />
-                <ScalarProperty Name="BLOGBASLIK" ColumnName="BLOGBASLIK" />
-                <ScalarProperty Name="BLOGICERIK" ColumnName="BLOGICERIK" />
-                <ScalarProperty Name="BLOGTARIH" ColumnName="BLOGTARIH" />
-                <ScalarProperty Name="BLOGGORSEL" ColumnName="BLOGGORSEL" />
-                <ScalarProperty Name="BLOGKATEGORİ" ColumnName="BLOGKATEGORİ" />
-                <ScalarProperty Name="BLOGTURID" ColumnName="BLOGTURID" />
+              <MappingFragment StoreEntitySet="TBLYORUM" >
+                <ScalarProperty Name="BLOGID" ColumnName="KITAPID" />
               </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLKATEGORI">
-            <EntityTypeMapping TypeName="project_blogModel.TBLKATEGORI">
-              <MappingFragment StoreEntitySet="TBLKATEGORI">
-                <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
-                <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
+              <MappingFragment StoreEntitySet="TBLKATEGORI" >
+                <ScalarProperty Name="BLOGKATEGORİ" ColumnName="KATEGORIID" />
               </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLYORUM">
-            <EntityTypeMapping TypeName="project_blogModel.TBLYORUM">
-              <MappingFragment StoreEntitySet="TBLYORUM">
-                <ScalarProperty Name="YORUMID" ColumnName="YORUMID" />
-                <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
-                <ScalarProperty Name="YORUM" ColumnName="YORUM" />
-                <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
-                <ScalarProperty Name="PUAN" ColumnName="PUAN" />
-                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLHAKKIMIZDA">
-            <EntityTypeMapping TypeName="project_blogModel.TBLHAKKIMIZDA">
-              <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
-                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLILETISIM">
-            <EntityTypeMapping TypeName="project_blogModel.TBLILETISIM">
-              <MappingFragment StoreEntitySet="TBLILETISIM">
-                <ScalarProperty Name="ICERIK" ColumnName="ICERIK" />
-                <ScalarProperty Name="KONU" ColumnName="KONU" />
-                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
-                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
-                <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
-                <ScalarProperty Name="MESAJID" ColumnName="MESAJID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="project_blogModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="project_blogModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="project_blogModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="project_blogModel.Store.sp_helpdiagramdefinition">
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLKATEGORI">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLKATEGORI)">
+        <MappingFragment StoreEntitySet="TBLKATEGORI">
+          <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
+          <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLYORUM">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLYORUM)">
+        <MappingFragment StoreEntitySet="TBLYORUM">
+          <ScalarProperty Name="YORUMID" ColumnName="YORUMID" />
+          <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
+          <ScalarProperty Name="YORUM" ColumnName="YORUM" />
+          <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
+          <ScalarProperty Name="PUAN" ColumnName="PUAN" />
+          <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLHAKKIMIZDA">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLHAKKIMIZDA)">
+        <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLILETISIM">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLILETISIM)">
+        <MappingFragment StoreEntitySet="TBLILETISIM">
+          <ScalarProperty Name="MESAJID" ColumnName="MESAJID" />
+          <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+          <ScalarProperty Name="KONU" ColumnName="KONU" />
+          <ScalarProperty Name="ICERIK" ColumnName="ICERIK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLADMIN">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLADMIN)">
+        <MappingFragment StoreEntitySet="TBLADMIN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KULLANICIADI" ColumnName="KULLANICIADI" />
+          <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLKULLANICI">
+      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLKULLANICI)">
+        <MappingFragment StoreEntitySet="TBLKULLANICI">
+          <ScalarProperty Name="KULLANICIID_" ColumnName="KULLANICIID_" />
+          <ScalarProperty Name="KULLANICINICK" ColumnName="KULLANICINICK" />
+          <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+          <ScalarProperty Name="KULLANICISOYAD" ColumnName="KULLANICISOYAD" />
+          <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
+          <ScalarProperty Name="KULLANICIMAIL" ColumnName="KULLANICIMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram3" FunctionName="project_blogModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram3" FunctionName="project_blogModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram3" FunctionName="project_blogModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition3" FunctionName="project_blogModel.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagramdefinition3_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="project_blogModel.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams3" FunctionName="project_blogModel.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagrams3_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -448,32 +653,10 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="project_blogModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="project_blogModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="TBLADMIN">
-            <EntityTypeMapping TypeName="project_blogModel.TBLADMIN">
-              <MappingFragment StoreEntitySet="TBLADMIN">
-                <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
-                <ScalarProperty Name="KULLANICIADI" ColumnName="KULLANICIADI" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBLKULLANICI">
-            <EntityTypeMapping TypeName="project_blogModel.TBLKULLANICI">
-              <MappingFragment StoreEntitySet="TBLKULLANICI">
-                <ScalarProperty Name="KULLANICIMAIL" ColumnName="KULLANICIMAIL" />
-                <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
-                <ScalarProperty Name="KULLANICISOYAD" ColumnName="KULLANICISOYAD" />
-                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
-                <ScalarProperty Name="KULLANICINICK" ColumnName="KULLANICINICK" />
-                <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram3" FunctionName="project_blogModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams3" FunctionName="project_blogModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -487,7 +670,7 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

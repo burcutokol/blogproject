@@ -1,8 +1,6 @@
 ﻿using BlogProject.Entity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -61,7 +59,7 @@ namespace BlogProject.AdminPages
             int BlogId = Convert.ToInt32(Request.QueryString["BLOGID"]);
             var Blog = db.TBLBLOG.Find(BlogId);
 
-            if(TextBox1.Text != "" && TextBox2.Text !="" && TextBox3.Text != "" && TextBox4.Text !="")
+            if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "")
             {
                 Blog.BLOGBASLIK = TextBox1.Text;
                 //Blog.BLOGTARIH= DateTime.Parse(TextBox2.Text);
@@ -76,8 +74,8 @@ namespace BlogProject.AdminPages
                 Response.Redirect("Blogs.aspx");
 
             }
-            
-             
+
+
 
         }
     }

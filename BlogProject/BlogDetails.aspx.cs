@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlogProject.Entity;
+using System;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
+using System.Reflection.Emit;
 using System.Web.UI.WebControls;
-using BlogProject.Entity;
 
 namespace BlogProject
 {
     public partial class BlogDetails : System.Web.UI.Page
     {
         project_blogEntities1 db = new project_blogEntities1();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
@@ -38,7 +37,28 @@ namespace BlogProject
             }
 
         }
-       
 
+        protected void btnLike_Click(object sender, EventArgs e)
+        {
+            int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
+            if (Session["KULLANICINICK"]!=null)
+            {
+                string kullaniciNick = Session["KULLANICINICK"] as string;
+                var User = db.TBLKULLANICI.FirstOrDefault(user => user.KULLANICINICK == kullaniciNick);
+                if (User != null)
+                {
+                    /*TBL_BEGENIBLOG t = new TBL_BEGENIBLOG
+                    {
+                        BLOG_ID = Blog_Id,
+                        KULLANICI_ID = User.KULLANICIID_
+                    };
+                    db.TBL_BEGENIBLOG.Add(t);
+                    db.SaveChanges();
+                    ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#successModal').modal('show'); setTimeout(function() { $('#successModal').modal('hide'); }, 1500);});", true);*/
+
+                }
+
+            }
+        }
     }
 }

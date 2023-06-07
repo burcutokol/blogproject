@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+﻿using BlogProject.Entity;
+using System;
 using System.Web.UI.WebControls;
-using BlogProject.Entity;
 
 namespace BlogProject
 {
@@ -32,6 +28,6 @@ namespace BlogProject
 
 
         }
-      
+
     }
 }

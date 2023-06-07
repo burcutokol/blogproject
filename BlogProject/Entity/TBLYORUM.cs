@@ -22,5 +22,6 @@ namespace BlogProject.Entity
         public string KULLANICIAD { get; set; }
     
         public virtual TBLBLOG TBLBLOG { get; set; }
+        public virtual TBLKULLANICI TBLKULLANICI { get; set; }
     }
 }

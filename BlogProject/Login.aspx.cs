@@ -1,10 +1,6 @@
 ﻿using BlogProject.Entity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace BlogProject
 {
@@ -21,11 +17,19 @@ namespace BlogProject
             var userQuery = from x in db.TBLKULLANICI
                             where x.KULLANICINICK == userName.Text
                             && x.KULLANICISIFRE == password.Text
-                            select x; 
-            if(userQuery.Any())
+                            select x;
+            if (userQuery.Any())
             {
-                Session.Add("KULLANICIADI", userName.Text); //Yönlenen sayfada kontrol et
-                Response.Redirect("DefaultPage.aspx");
+                Session.Add("KULLANICINICK", userName.Text); //Yönlenen sayfada kontrol et
+
+                if (userName.Text != null && userName.Text != "")
+                {
+                    Response.Redirect("DefaultPagewAccount.aspx");
+                }
+                else
+                {
+                    Response.Redirect("DefaultPage.aspx");
+                }
             }
             else
             {

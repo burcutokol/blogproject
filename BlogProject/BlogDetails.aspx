@@ -47,7 +47,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="single-grid">
                         <asp:Repeater ID="BlogDetail" runat="server">
                             <ItemTemplate>
-                                <img src="<%#Eval ("BLOGGORSEL") %> " alt="" style="height: 400px; width: 300px; margin-bottom: 20px" />
+                                <div class="row">
+                                    <div class="col-md-8">
+                                    <img src="<%#Eval ("BLOGGORSEL") %> " alt="" style="height: 400px; width: 300px; margin-bottom: 20px" />
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                    <div class="col-md-12 mt-2">
+                                         <button class="btn btn-info btn-block">Bu Kitabı Okudum</button>
+                                     </div>
+                                    <div class="col-md-12 mt-2">
+                                        <asp:Button ID="btnLike" runat="server" Text="Bu Kitabı Beğendim" class="btn btn-success btn-block" OnClick="btnLike_Click" />
+                                     </div>
+                                </div>
+                                    </div>
+                                </div>
+                                
                                 <h3><%#Eval("BLOGBASLIK")%></h3>
                                 <p>
                                     <%#Eval("BLOGICERIK") %>
@@ -98,5 +114,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </body>
     </html>
+      <div id="successModal" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Kaydedildi</h4>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Değişiklikler başarıyla kaydedildi.</p>
+          </div>
+          
+        </div>
+      </div>
+</div>
     <!---->
 </asp:Content>

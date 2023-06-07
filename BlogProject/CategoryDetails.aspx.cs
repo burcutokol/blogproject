@@ -1,9 +1,6 @@
 ﻿using BlogProject.Entity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BlogProject
@@ -20,7 +17,7 @@ namespace BlogProject
                 .Select(x => x.KATEGORIAD)
                 .FirstOrDefault();
 
-            
+
             var Blogs = db.TBLBLOG.Where(x => x.BLOGKATEGORİ == Category_Id).ToList();
             Repeater1.DataSource = Blogs;
             Repeater1.DataBind();
@@ -36,7 +33,8 @@ namespace BlogProject
             var LatestComments = db.TBLYORUM
             .OrderByDescending(x => x.TBLBLOG.BLOGTARIH)
             .AsEnumerable()
-            .Select(y => new {
+            .Select(y => new
+            {
                 Yorum = y.YORUM.Substring(0, Math.Min(y.YORUM.Length, 40)),
                 BlogId = y.KITAPID,
                 KullanıcıAd = y.KULLANICIAD,
