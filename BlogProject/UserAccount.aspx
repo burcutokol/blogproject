@@ -21,6 +21,7 @@
 				 
 				  <div class="menu"> </div> 
 				   <ul class="d-flex align-items-center" style="justify-content: center;">
+                        <li class="active"><a href="ReadingList.aspx">Okuma Listem</a></li>
 						<li class="active"><a href="Default.aspx">Bloglar</a></li>						
 						<li><a href="AboutPage.aspx">Hakkımızda</a></li>	
 						<li><a href="Contact.aspx">İletişim</a></li>						
@@ -74,13 +75,8 @@
                        
 
                     </div>
-                    </form>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container rounded bg-white mt-5">
+
+                        <div class="container rounded bg-white mt-5">
         <div class="row">
             <div class="container py-5 h-100">
   <div class="row d-flex justify-content-center align-items-center h-100">
@@ -88,53 +84,34 @@
       <div class="card rounded-3">
         <div class="card-body p-4">
 
-          <h4 class="text-center my-3 pb-3">Beğendiğim Kitaplar</h4>
+          <h4 class="text-center my-3 pb-3">Okuduğum Kitaplar</h4>
 
-          <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-            
-
-          
-          </form>
-
-          <table class="table mb-4">
+          <asp:Repeater ID="Repeater2" runat="server">
+    <HeaderTemplate>
+        <table class="table mb-3">
             <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Todo item</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
-              </tr>
+                <tr>
+                    <th scope="col">Kitap İsmi</th>
+                    <th scope="col">Yazar</th>
+                    <th scope="col"></th>
+                </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Buy groceries for next week</td>
-                <td>In progress</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                  <button type="submit" class="btn btn-success ms-1">Finished</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Renew car insurance</td>
-                <td>In progress</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                  <button type="submit" class="btn btn-success ms-1">Finished</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Sign up for online course</td>
-                <td>In progress</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                  <button type="submit" class="btn btn-success ms-1">Finished</button>
-                </td>
-              </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+        <tr>
+            <td><asp:Label ID="Label1" runat="server" Text='<%# Eval("BlogBaslik") %>'></asp:Label></td>
+            <td><asp:Label ID="Label2" runat="server" Text='<%# Eval("BlogKategori") %>'></asp:Label></td>
+            <td>
+                <asp:Button ID="Button2" runat="server" Text="Kitabı Çıkar" class="btn btn-danger" OnClick="Button3_Click" />
+            </td>
+        </tr>
+    </ItemTemplate>
+    <FooterTemplate>
             </tbody>
-          </table>
+        </table>
+    </FooterTemplate>
+</asp:Repeater>
 
         </div>
       </div>
@@ -143,51 +120,45 @@
            <div class="card rounded-3">
         <div class="card-body p-4">
 
-          <h4 class="text-center my-3 pb-3">Okuduğum Kitaplar</h4>
+          <h4 class="text-center my-3 pb-3">Beğendiğim Kitaplar</h4>
 
-          <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-            
+         
 
-          
-          </form>
-
-          <table class="table mb-3">
+    <asp:Repeater ID="Repeater1" runat="server">
+    <HeaderTemplate>
+        <table class="table mb-3">
             <thead>
-              <tr>
-                <th scope="col">Kitap İsmi</th>
-                <th scope="col">Yazar</th>
-                <th scope="col"></th>
-              </tr>
+                <tr>
+                    <th scope="col">Kitap İsmi</th>
+                    <th scope="col">Yazar</th>
+                    <th scope="col"></th>
+                </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Buy groceries for next week</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Kitabı Çıkar</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Renew car insurance</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Sign up for online course</td>
-                <td>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </td>
-              </tr>
+    </HeaderTemplate>
+    <ItemTemplate>
+        <tr>
+           <td><asp:Label ID="Label1" runat="server" Text='<%# Eval("BlogBaslik") %>'></asp:Label></td>
+            <td><asp:Label ID="Label2" runat="server" Text='<%# Eval("BlogKategori") %>'></asp:Label></td>
+            <td>
+                <asp:Button ID="Button2" runat="server" Text="Kitabı Çıkar" class="btn btn-danger" OnClick="Button2_Click" />
+            </td>
+        </tr>
+    </ItemTemplate>
+    <FooterTemplate>
             </tbody>
-          </table>
+        </table>
+    </FooterTemplate>
+</asp:Repeater>
+
+
+
+          
 
         </div>
       </div>
        </div>
-                  
+                   
 
         </div> 
   </div>
@@ -195,9 +166,16 @@
 
            
     </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 
-    <div id="errorModal" class="modal">
+    <div id="errorModal" class="modal" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

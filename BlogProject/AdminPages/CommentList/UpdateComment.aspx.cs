@@ -1,12 +1,13 @@
 ﻿using BlogProject.Entity;
 using System;
+using System.Linq;
 using System.Web.UI;
 
 namespace BlogProject.AdminPages.CommentList
 {
     public partial class UpdateComment : System.Web.UI.Page
     {
-        project_blogEntities1 db = new project_blogEntities1();
+        project_blogEntities db = new project_blogEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             int Comment_Id = Convert.ToInt32(Request.QueryString["YORUMID"]);

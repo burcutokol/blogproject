@@ -4,20 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="de8e9c4c2f714b8dba95b86076def5b6" Name="Diagram1" ZoomLevel="73">
-        <EntityTypeShape EntityType="project_blogModel.TBL_TUR" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="project_blogModel.TBLBLOG" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="project_blogModel.TBLKATEGORI" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="project_blogModel.TBLYORUM" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+      <Diagram DiagramId="c688650d01c14acdb93f6f15f6bfe88f" Name="Diagram1">
+        <EntityTypeShape EntityType="project_blogModel.TBL_BLOGBEGENI" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBL_BLOGISTEK" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBL_BLOGOKUNAN" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBL_TUR" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLADMIN" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLBLOG" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLHAKKIMIZDA" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLILETISIM" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLKATEGORI" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLKULLANICI" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="project_blogModel.TBLYORUM" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGBEGENI_TBLBLOG" ManuallyRouted="false" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGBEGENI_TBLKULLANICI" ManuallyRouted="false" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGISTEK_TBLBLOG" ManuallyRouted="false" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGISTEK_TBLKULLANICI" ManuallyRouted="false" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGOKUNAN_TBLBLOG" ManuallyRouted="false" />
+        <AssociationConnector Association="project_blogModel.FK_TBL_BLOGOKUNAN_TBLKULLANICI" ManuallyRouted="false" />
         <AssociationConnector Association="project_blogModel.FK_TBLBLOG_TBL_TUR" ManuallyRouted="false" />
         <AssociationConnector Association="project_blogModel.FK_TBLBLOG_TBLKATEGORI" ManuallyRouted="false" />
         <AssociationConnector Association="project_blogModel.FK_TBLYORUM_TBLBLOG" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="project_blogModel.TBLHAKKIMIZDA" Width="1.5" PointX="5.375" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="project_blogModel.TBLILETISIM" Width="1.5" PointX="7.375" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="project_blogModel.TBLADMIN" Width="1.5" PointX="7.375" PointY="3.75" />
-        <AssociationConnector Association="project_blogModel.FK_TBLYORUM_TBLKULLANICI" ManuallyRouted="false"/>
-        <EntityTypeShape EntityType="project_blogModel.TBLKULLANICI" Width="1.5" PointX="3.375" PointY="8" />
-
+        <AssociationConnector Association="project_blogModel.FK_TBLYORUM_TBLKULLANICI" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

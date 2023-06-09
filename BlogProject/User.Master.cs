@@ -44,7 +44,10 @@ namespace BlogProject
                             // Kullanıcı giriş yapmamışsa, logoya tıklanınca yönlendirilecek sayfa
                             logoLink.NavigateUrl = "DefaultPage.aspx";
                             userLogin.NavigateUrl = "Login.aspx";
-                            Label1.Text = "Giriş Yap";
+                            if (Label1 != null)
+                            {
+                                Label1.Text = "Giriş Yap";
+                            }
 
 
                         }

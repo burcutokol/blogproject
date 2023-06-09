@@ -1,5 +1,6 @@
 ﻿using BlogProject.Entity;
 using System;
+using System.Data.Objects.SqlClient;
 using System.Linq;
 using System.Web.DynamicData;
 using System.Web.UI.WebControls;
@@ -8,7 +9,7 @@ namespace BlogProject
 {
     public partial class DefaultPagewAccount : System.Web.UI.Page
     {
-        project_blogEntities1 db = new project_blogEntities1();
+        project_blogEntities db = new project_blogEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -78,15 +79,26 @@ namespace BlogProject
             latestblogs.DataBind();
 
             var LatestComments = db.TBLYORUM
-            .OrderByDescending(x => x.TBLBLOG.BLOGTARIH)
-            .AsEnumerable()
-            .Select(y => new
-            {
-                Yorum = y.YORUM.Substring(0, Math.Min(y.YORUM.Length, 40)),
-                BlogId = y.KITAPID,
-                KullanıcıAd = y.KULLANICIAD,
+     .OrderByDescending(y => y.YORUMID) // Yorum ID'sine göre sıralama
+     .Select(y => new
+     {
+         Yorum = y.YORUM.Substring(0, y.YORUM.Length < 40 ? y.YORUM.Length : 40),
+         BlogId = y.KITAPID,
+         KullanıcıAd = y.KULLANICIAD,
+         BlogTarih = db.TBLBLOG
+             .Where(b => b.BLOGID == y.KITAPID) // İlgili blogu bul
+             .Select(b => b.BLOGTARIH)
+             .FirstOrDefault()
+     })
+     .OrderByDescending(y => y.BlogTarih) // Blog tarihine göre sıralama
+     .Take(5)
+     .ToList();
 
-            }).ToList().Take(5);
+
+
+
+
+
             latestcomments.DataSource = LatestComments;
             latestcomments.DataBind();
 

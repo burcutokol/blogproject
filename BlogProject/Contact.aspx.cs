@@ -11,7 +11,7 @@ namespace BlogProject
 
         }
 
-        project_blogEntities1 db = new project_blogEntities1();
+        project_blogEntities db = new project_blogEntities();
         protected void Button1_Click(object sender, EventArgs e)
         {
             TBLILETISIM t = new TBLILETISIM();

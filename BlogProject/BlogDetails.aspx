@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="BlogDetails.aspx.cs" Inherits="BlogProject.BlogDetails" %>
+﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="BlogDetails.aspx.cs" Inherits="BlogProject.BlogDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -44,7 +44,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="single">
             <div class="container">
                 <div class="col-md-8 single-main">
-                    <div class="single-grid">
+                    <form runat="server">  
+                        <div class="single-grid">
                         <asp:Repeater ID="BlogDetail" runat="server">
                             <ItemTemplate>
                                 <div class="row">
@@ -55,10 +56,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <div class="col-md-4">
                                         <div class="row">
                                     <div class="col-md-12 mt-2">
-                                         <button class="btn btn-info btn-block">Bu Kitabı Okudum</button>
+                                        <asp:Button ID="btnRead" runat="server" Text="Bu Kitabı Okudum" class="btn btn-info btn-block" OnClick="btnRead_Click" />
+                                      
                                      </div>
                                     <div class="col-md-12 mt-2">
                                         <asp:Button ID="btnLike" runat="server" Text="Bu Kitabı Beğendim" class="btn btn-success btn-block" OnClick="btnLike_Click" />
+                                     </div>
+                                            <div class="col-md-12 mt-2">
+                                        <asp:Button ID="btnReadingList" runat="server" Text="Okuma Listeme Ekle" class="btn btn-primary btn-block" OnClick="btnReadingList_Click" />
                                      </div>
                                 </div>
                                     </div>
@@ -92,20 +97,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="content-form">
                         <h3>Bir Yorum Yazın.</h3>
-                        <form runat="server">
+
                             <asp:TextBox ID="Name" runat="server"
                                 placeholder = "Adınız">
                             </asp:TextBox>
                             <asp:TextBox ID="Mail" runat="server"
-                                placeholder = "Mail Adresiniz" required="">
+                                placeholder = "Mail Adresiniz">
                             </asp:TextBox>
                             <asp:TextBox ID="Comment" runat="server" TextMode="MultiLine" Height="100"
                                 placeholder = "Yorumunuz">
                             </asp:TextBox>
                             <asp:Button ID="btnSave" runat="server" Text="Yorum Yap" OnClick="Button1_Click" />
                             
-                        </form>
+
                     </div>
+                    </form>
+                    
                 </div>
 
 
@@ -121,7 +128,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <h4 class="modal-title">Kaydedildi</h4>
           </div>
           <div class="modal-body">
-            <p class="text-center">Değişiklikler başarıyla kaydedildi.</p>
+            <p class="text-center">Listeye eklendi.</p>
+          </div>
+          
+        </div>
+      </div>
+</div>
+      <div id="failModal" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Kitap Ekli</h4>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">Kitap zaten listenizde.</p>
           </div>
           
         </div>

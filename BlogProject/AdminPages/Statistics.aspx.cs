@@ -6,7 +6,7 @@ namespace BlogProject.AdminPages
 {
     public partial class Statistics : System.Web.UI.Page
     {
-        project_blogEntities1 db = new project_blogEntities1();
+        project_blogEntities db = new project_blogEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Text = db.TBLBLOG.Count().ToString(); //toplam kitap sayısı

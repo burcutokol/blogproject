@@ -85,6 +85,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				 
 				  <div class="menu"> </div> 
 				   <ul class="d-flex align-items-center" style="justify-content: center;">
+					    <li class="active"><a href="ReadingList.aspx">Okuma Listem</a></li>
 						<li class="active"><a href="DefaultPage.aspx">Bloglar</a></li>						
 						<li class="active"><a href="AboutPage.aspx">Hakkımızda</a></li>	
 						<li class="active"><a href="Contact.aspx">İletişim</a></li>						

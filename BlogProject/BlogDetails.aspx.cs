@@ -1,15 +1,14 @@
 ﻿using BlogProject.Entity;
 using System;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Web.UI.WebControls;
 
 namespace BlogProject
 {
     public partial class BlogDetails : System.Web.UI.Page
     {
-        project_blogEntities1 db = new project_blogEntities1();
-        
+        project_blogEntities db = new project_blogEntities();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
@@ -17,8 +16,13 @@ namespace BlogProject
             BlogDetail.DataSource = Blog;
             BlogDetail.DataBind();
 
-            var Comments = db.TBLYORUM.Where(x => x.KITAPID == Blog_Id).ToList();
+            var Comments = db.TBLYORUM
+     .Include("TBLBLOG") // İlgili blogu yükle
+     .Where(x => x.KITAPID == Blog_Id)
+     .ToList();
+
             CommentList.DataSource = Comments;
+
             CommentList.DataBind();
         }
 
@@ -40,25 +44,103 @@ namespace BlogProject
 
         protected void btnLike_Click(object sender, EventArgs e)
         {
+            
+                int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
+                if (Session["KULLANICINICK"] != null)
+                {
+                    string kullaniciNick = Session["KULLANICINICK"] as string;
+                    var User = db.TBLKULLANICI.FirstOrDefault(user => user.KULLANICINICK == kullaniciNick);
+                    if (User != null)
+                    {
+                        TBLBLOG blog = db.TBLBLOG.FirstOrDefault(b => b.BLOGID == Blog_Id);
+                    bool alreadyLiked = db.TBL_BLOGOKUNAN.Any(x => x.KULLANICI_ID == User.KULLANICIID_ && x.KITAP_ID == blog.BLOGID);
+                    TBL_BLOGBEGENI t = new TBL_BLOGBEGENI
+                        {
+                            KULLANICI_ID = User.KULLANICIID_,
+                            TBLBLOG = blog
+                        };
+                    if(!alreadyLiked)
+                    {
+                        db.TBL_BLOGBEGENI.Add(t);
+                        db.SaveChanges();
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#successModal').modal('show'); setTimeout(function() { $('#successModal').modal('hide'); }, 1500);});", true);
+
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#failModal').modal('show'); setTimeout(function() { $('#failModal').modal('hide'); }, 2000);});", true);
+                    }
+
+                }
+
+                }
+            
+            
+        }
+        protected void btnRead_Click(object sender, EventArgs e)
+        {
             int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
-            if (Session["KULLANICINICK"]!=null)
+            if (Session["KULLANICINICK"] != null)
             {
                 string kullaniciNick = Session["KULLANICINICK"] as string;
                 var User = db.TBLKULLANICI.FirstOrDefault(user => user.KULLANICINICK == kullaniciNick);
                 if (User != null)
                 {
-                    /*TBL_BEGENIBLOG t = new TBL_BEGENIBLOG
+                    TBLBLOG blog = db.TBLBLOG.FirstOrDefault(b => b.BLOGID == Blog_Id);
+                    bool alreadyRead = db.TBL_BLOGOKUNAN.Any(x => x.KULLANICI_ID == User.KULLANICIID_ && x.KITAP_ID == blog.BLOGID);
+                    TBL_BLOGOKUNAN t = new TBL_BLOGOKUNAN
                     {
-                        BLOG_ID = Blog_Id,
-                        KULLANICI_ID = User.KULLANICIID_
+                        KULLANICI_ID = User.KULLANICIID_,
+                        TBLBLOG = blog
                     };
-                    db.TBL_BEGENIBLOG.Add(t);
-                    db.SaveChanges();
-                    ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#successModal').modal('show'); setTimeout(function() { $('#successModal').modal('hide'); }, 1500);});", true);*/
+                    if(!alreadyRead)
+                    {
+                        db.TBL_BLOGOKUNAN.Add(t);
+                        db.SaveChanges();
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#successModal').modal('show'); setTimeout(function() { $('#successModal').modal('hide'); }, 1500);});", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#failModal').modal('show'); setTimeout(function() { $('#failModal').modal('hide'); }, 2000);});", true);
+                    }
+                    
 
                 }
 
             }
         }
+        protected void btnReadingList_Click(object sender, EventArgs e)
+        {
+            int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
+            if (Session["KULLANICINICK"] != null)
+            {
+                string kullaniciNick = Session["KULLANICINICK"] as string;
+                var User = db.TBLKULLANICI.FirstOrDefault(user => user.KULLANICINICK == kullaniciNick);
+                if (User != null)
+                {
+                    TBLBLOG blog = db.TBLBLOG.FirstOrDefault(b => b.BLOGID == Blog_Id);
+                    bool alreadyRead = db.TBL_BLOGISTEK.Any(x => x.KULLANICI_ID == User.KULLANICIID_ && x.KITAP_ID == blog.BLOGID);
+                    TBL_BLOGISTEK t = new TBL_BLOGISTEK
+                    {
+                        KULLANICI_ID = User.KULLANICIID_,
+                        TBLBLOG = blog
+                    };
+                    if (!alreadyRead)
+                    {
+                        db.TBL_BLOGISTEK.Add(t);
+                        db.SaveChanges();
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#successModal').modal('show'); setTimeout(function() { $('#successModal').modal('hide'); }, 1500);});", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "ModalScript", "$(document).ready(function(){$('#failModal').modal('show'); setTimeout(function() { $('#failModal').modal('hide'); }, 2000);});", true);
+                    }
+
+
+                }
+
+            }
+        }
+
     }
 }

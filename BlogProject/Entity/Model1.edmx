@@ -5,6 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="project_blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_BLOGBEGENI">
+          <Key>
+            <PropertyRef Name="BEGENI_ID" />
+          </Key>
+          <Property Name="BEGENI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KITAP_ID" Type="int" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_BLOGISTEK">
+          <Key>
+            <PropertyRef Name="ISTEK_ID" />
+          </Key>
+          <Property Name="ISTEK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KITAP_ID" Type="int" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_BLOGOKUNAN">
+          <Key>
+            <PropertyRef Name="OKUNUS_ID" />
+          </Key>
+          <Property Name="OKUNUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KITAP_ID" Type="int" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TBL_TUR">
           <Key>
             <PropertyRef Name="TURID" />
@@ -12,8 +36,6 @@
           <Property Name="TURID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TURAD" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TBLADMIN">
           <Key>
             <PropertyRef Name="ID" />
@@ -74,13 +96,85 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Key>
             <PropertyRef Name="YORUMID" />
           </Key>
-          <Property Name="YORUMID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="YORUMID" Type="int" Nullable="false" />
           <Property Name="KULLANICIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="YORUM" Type="varchar" MaxLength="4000" />
-          <Property Name="KITAPID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="KITAPID" Type="int" Nullable="false" />
           <Property Name="PUAN" Type="int" />
           <Property Name="KULLANICIAD" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_TBL_BLOGBEGENI_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGBEGENI" Type="Self.TBL_BLOGBEGENI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGBEGENI">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGBEGENI_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGBEGENI" Type="Self.TBL_BLOGBEGENI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGBEGENI">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGISTEK_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGISTEK" Type="Self.TBL_BLOGISTEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGISTEK">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGISTEK_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGISTEK" Type="Self.TBL_BLOGISTEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGISTEK">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGOKUNAN_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGOKUNAN" Type="Self.TBL_BLOGOKUNAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGOKUNAN">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGOKUNAN_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGOKUNAN" Type="Self.TBL_BLOGOKUNAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGOKUNAN">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBLBLOG_TBL_TUR">
           <End Role="TBL_TUR" Type="Self.TBL_TUR" Multiplicity="0..1" />
           <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="*" />
@@ -129,52 +223,42 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="project_blogModelStoreContainer">
+          <EntitySet Name="TBL_BLOGBEGENI" EntityType="Self.TBL_BLOGBEGENI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_BLOGISTEK" EntityType="Self.TBL_BLOGISTEK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_BLOGOKUNAN" EntityType="Self.TBL_BLOGOKUNAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_TUR" EntityType="Self.TBL_TUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLBLOG" EntityType="Self.TBLBLOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLKATEGORI" EntityType="Self.TBLKATEGORI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLKULLANICI" EntityType="Self.TBLKULLANICI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TBLADMIN].[ID] AS [ID], 
-    [TBLADMIN].[KULLANICIADI] AS [KULLANICIADI], 
-    [TBLADMIN].[SIFRE] AS [SIFRE]
-    FROM [dbo].[TBLADMIN] AS [TBLADMIN]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_TBL_BLOGBEGENI_TBLBLOG" Association="Self.FK_TBL_BLOGBEGENI_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGBEGENI" EntitySet="TBL_BLOGBEGENI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGBEGENI_TBLKULLANICI" Association="Self.FK_TBL_BLOGBEGENI_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGBEGENI" EntitySet="TBL_BLOGBEGENI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGISTEK_TBLBLOG" Association="Self.FK_TBL_BLOGISTEK_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGISTEK" EntitySet="TBL_BLOGISTEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGISTEK_TBLKULLANICI" Association="Self.FK_TBL_BLOGISTEK_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGISTEK" EntitySet="TBL_BLOGISTEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGOKUNAN_TBLBLOG" Association="Self.FK_TBL_BLOGOKUNAN_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGOKUNAN" EntitySet="TBL_BLOGOKUNAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGOKUNAN_TBLKULLANICI" Association="Self.FK_TBL_BLOGOKUNAN_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGOKUNAN" EntitySet="TBL_BLOGOKUNAN" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBLBLOG_TBL_TUR" Association="Self.FK_TBLBLOG_TBL_TUR">
             <End Role="TBL_TUR" EntitySet="TBL_TUR" />
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
@@ -196,6 +280,36 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="project_blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_BLOGBEGENI">
+          <Key>
+            <PropertyRef Name="BEGENI_ID" />
+          </Key>
+          <Property Name="BEGENI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KITAP_ID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBL_BLOGBEGENI_TBLBLOG" FromRole="TBL_BLOGBEGENI" ToRole="TBLBLOG" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="Self.FK_TBL_BLOGBEGENI_TBLKULLANICI" FromRole="TBL_BLOGBEGENI" ToRole="TBLKULLANICI" />
+        </EntityType>
+        <EntityType Name="TBL_BLOGISTEK">
+          <Key>
+            <PropertyRef Name="ISTEK_ID" />
+          </Key>
+          <Property Name="ISTEK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KITAP_ID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBL_BLOGISTEK_TBLBLOG" FromRole="TBL_BLOGISTEK" ToRole="TBLBLOG" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="Self.FK_TBL_BLOGISTEK_TBLKULLANICI" FromRole="TBL_BLOGISTEK" ToRole="TBLKULLANICI" />
+        </EntityType>
+        <EntityType Name="TBL_BLOGOKUNAN">
+          <Key>
+            <PropertyRef Name="OKUNUS_ID" />
+          </Key>
+          <Property Name="OKUNUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KITAP_ID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICI_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBL_BLOGOKUNAN_TBLBLOG" FromRole="TBL_BLOGOKUNAN" ToRole="TBLBLOG" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="Self.FK_TBL_BLOGOKUNAN_TBLKULLANICI" FromRole="TBL_BLOGOKUNAN" ToRole="TBLKULLANICI" />
+        </EntityType>
         <EntityType Name="TBL_TUR">
           <Key>
             <PropertyRef Name="TURID" />
@@ -203,6 +317,14 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="TURID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TURAD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBLBLOG_TBL_TUR" FromRole="TBL_TUR" ToRole="TBLBLOG" />
+        </EntityType>
+        <EntityType Name="TBLADMIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANICIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SIFRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TBLBLOG">
           <Key>
@@ -213,12 +335,32 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="BLOGICERIK" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="BLOGTARIH" Type="DateTime" Precision="0" />
           <Property Name="BLOGGORSEL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BLOGKATEGORİ" Type="Byte" Nullable="false" />
+          <Property Name="BLOGKATEGORİ" Type="Byte" />
           <Property Name="BLOGTURID" Type="Int32" />
+          <NavigationProperty Name="TBL_BLOGBEGENI" Relationship="Self.FK_TBL_BLOGBEGENI_TBLBLOG" FromRole="TBLBLOG" ToRole="TBL_BLOGBEGENI" />
+          <NavigationProperty Name="TBL_BLOGISTEK" Relationship="Self.FK_TBL_BLOGISTEK_TBLBLOG" FromRole="TBLBLOG" ToRole="TBL_BLOGISTEK" />
+          <NavigationProperty Name="TBL_BLOGOKUNAN" Relationship="Self.FK_TBL_BLOGOKUNAN_TBLBLOG" FromRole="TBLBLOG" ToRole="TBL_BLOGOKUNAN" />
           <NavigationProperty Name="TBL_TUR" Relationship="Self.FK_TBLBLOG_TBL_TUR" FromRole="TBLBLOG" ToRole="TBL_TUR" />
           <NavigationProperty Name="TBLKATEGORI" Relationship="Self.FK_TBLBLOG_TBLKATEGORI" FromRole="TBLBLOG" ToRole="TBLKATEGORI" />
           <NavigationProperty Name="TBLYORUM" Relationship="Self.FK_TBLYORUM_TBLBLOG" FromRole="TBLBLOG" ToRole="TBLYORUM" />
-          <NavigationProperty Name="TBLKULLANICI" Relationship="project_blogModel.TBL_BEGENIBLOG" FromRole="TBLBLOG" ToRole="TBLKULLANICI" />
+        </EntityType>
+        <EntityType Name="TBLHAKKIMIZDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBLILETISIM">
+          <Key>
+            <PropertyRef Name="MESAJID" />
+          </Key>
+          <Property Name="MESAJID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADSOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KONU" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="ICERIK" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TBLKATEGORI">
           <Key>
@@ -228,19 +370,106 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
           <Property Name="KATEGORIAD" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBLBLOG_TBLKATEGORI" FromRole="TBLKATEGORI" ToRole="TBLBLOG" />
         </EntityType>
+        <EntityType Name="TBLKULLANICI">
+          <Key>
+            <PropertyRef Name="KULLANICIID_" />
+          </Key>
+          <Property Name="KULLANICIID_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANICINICK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KULLANICIAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KULLANICISOYAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KULLANICISIFRE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KULLANICIMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBL_BLOGBEGENI" Relationship="Self.FK_TBL_BLOGBEGENI_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBL_BLOGBEGENI" />
+          <NavigationProperty Name="TBL_BLOGISTEK" Relationship="Self.FK_TBL_BLOGISTEK_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBL_BLOGISTEK" />
+          <NavigationProperty Name="TBL_BLOGOKUNAN" Relationship="Self.FK_TBL_BLOGOKUNAN_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBL_BLOGOKUNAN" />
+          <NavigationProperty Name="TBLYORUM" Relationship="Self.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBLYORUM" />
+        </EntityType>
         <EntityType Name="TBLYORUM">
           <Key>
             <PropertyRef Name="YORUMID" />
           </Key>
-          <Property Name="YORUMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KULLANICIID" Type="Int32" Nullable="false" />
+          <Property Name="YORUMID" Type="Int32" Nullable="false" />
+          <Property Name="KULLANICIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="YORUM" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="KITAPID" Type="Int32" Nullable="false" />
           <Property Name="PUAN" Type="Int32" />
           <Property Name="KULLANICIAD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TBLBLOG" Relationship="Self.FK_TBLYORUM_TBLBLOG" FromRole="TBLYORUM" ToRole="TBLBLOG" />
-          <NavigationProperty Name="TBLKULLANICI" Relationship="project_blogModel.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLYORUM" ToRole="TBLKULLANICI" />
+          <NavigationProperty Name="TBLKULLANICI" Relationship="Self.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLYORUM" ToRole="TBLKULLANICI" />
         </EntityType>
+        <Association Name="FK_TBL_BLOGBEGENI_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGBEGENI" Type="Self.TBL_BLOGBEGENI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGBEGENI">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGBEGENI_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGBEGENI" Type="Self.TBL_BLOGBEGENI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGBEGENI">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGISTEK_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGISTEK" Type="Self.TBL_BLOGISTEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGISTEK">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGISTEK_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGISTEK" Type="Self.TBL_BLOGISTEK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGISTEK">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGOKUNAN_TBLBLOG">
+          <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="1" />
+          <End Role="TBL_BLOGOKUNAN" Type="Self.TBL_BLOGOKUNAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLBLOG">
+              <PropertyRef Name="BLOGID" />
+            </Principal>
+            <Dependent Role="TBL_BLOGOKUNAN">
+              <PropertyRef Name="KITAP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BLOGOKUNAN_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBL_BLOGOKUNAN" Type="Self.TBL_BLOGOKUNAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBL_BLOGOKUNAN">
+              <PropertyRef Name="KULLANICI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBLBLOG_TBL_TUR">
           <End Role="TBL_TUR" Type="Self.TBL_TUR" Multiplicity="0..1" />
           <End Role="TBLBLOG" Type="Self.TBLBLOG" Multiplicity="*" />
@@ -277,11 +506,54 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="project_blogEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_TBLYORUM_TBLKULLANICI">
+          <End Role="TBLKULLANICI" Type="Self.TBLKULLANICI" Multiplicity="1" />
+          <End Role="TBLYORUM" Type="Self.TBLYORUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKULLANICI">
+              <PropertyRef Name="KULLANICIID_" />
+            </Principal>
+            <Dependent Role="TBLYORUM">
+              <PropertyRef Name="KULLANICIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="project_blogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_BLOGBEGENI" EntityType="Self.TBL_BLOGBEGENI" />
+          <EntitySet Name="TBL_BLOGISTEK" EntityType="Self.TBL_BLOGISTEK" />
+          <EntitySet Name="TBL_BLOGOKUNAN" EntityType="Self.TBL_BLOGOKUNAN" />
           <EntitySet Name="TBL_TUR" EntityType="Self.TBL_TUR" />
+          <EntitySet Name="TBLADMIN" EntityType="Self.TBLADMIN" />
           <EntitySet Name="TBLBLOG" EntityType="Self.TBLBLOG" />
+          <EntitySet Name="TBLHAKKIMIZDA" EntityType="Self.TBLHAKKIMIZDA" />
+          <EntitySet Name="TBLILETISIM" EntityType="Self.TBLILETISIM" />
           <EntitySet Name="TBLKATEGORI" EntityType="Self.TBLKATEGORI" />
+          <EntitySet Name="TBLKULLANICI" EntityType="Self.TBLKULLANICI" />
           <EntitySet Name="TBLYORUM" EntityType="Self.TBLYORUM" />
+          <AssociationSet Name="FK_TBL_BLOGBEGENI_TBLBLOG" Association="Self.FK_TBL_BLOGBEGENI_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGBEGENI" EntitySet="TBL_BLOGBEGENI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGBEGENI_TBLKULLANICI" Association="Self.FK_TBL_BLOGBEGENI_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGBEGENI" EntitySet="TBL_BLOGBEGENI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGISTEK_TBLBLOG" Association="Self.FK_TBL_BLOGISTEK_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGISTEK" EntitySet="TBL_BLOGISTEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGISTEK_TBLKULLANICI" Association="Self.FK_TBL_BLOGISTEK_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGISTEK" EntitySet="TBL_BLOGISTEK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGOKUNAN_TBLBLOG" Association="Self.FK_TBL_BLOGOKUNAN_TBLBLOG">
+            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
+            <End Role="TBL_BLOGOKUNAN" EntitySet="TBL_BLOGOKUNAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BLOGOKUNAN_TBLKULLANICI" Association="Self.FK_TBL_BLOGOKUNAN_TBLKULLANICI">
+            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
+            <End Role="TBL_BLOGOKUNAN" EntitySet="TBL_BLOGOKUNAN" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBLBLOG_TBL_TUR" Association="Self.FK_TBLBLOG_TBL_TUR">
             <End Role="TBL_TUR" EntitySet="TBL_TUR" />
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
@@ -294,369 +566,129 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
             <End Role="TBLBLOG" EntitySet="TBLBLOG" />
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
-          <EntitySet Name="TBLHAKKIMIZDA" EntityType="project_blogModel.TBLHAKKIMIZDA" />
-          <EntitySet Name="TBLILETISIM" EntityType="project_blogModel.TBLILETISIM" />
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(project_blogModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="TBLADMIN" EntityType="project_blogModel.TBLADMIN" />
-          <FunctionImport Name="sp_alterdiagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition1_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(project_blogModel.sp_helpdiagrams1_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams1" />
-          <EntitySet Name="TBLKULLANICI" EntityType="project_blogModel.TBLKULLANICI" />
-          <AssociationSet Name="FK_TBLYORUM_TBLKULLANICI" Association="project_blogModel.FK_TBLYORUM_TBLKULLANICI">
+          <AssociationSet Name="FK_TBLYORUM_TBLKULLANICI" Association="Self.FK_TBLYORUM_TBLKULLANICI">
             <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
             <End Role="TBLYORUM" EntitySet="TBLYORUM" />
           </AssociationSet>
-          <AssociationSet Name="TBL_BEGENIBLOG" Association="project_blogModel.TBL_BEGENIBLOG">
-            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
-            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
-          </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram2">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram2">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram2">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition2" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition2_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams2" ReturnType="Collection(project_blogModel.sp_helpdiagrams2_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram2">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams2" />
-          <AssociationSet Name="TBL_BEGENIBLOG1" Association="project_blogModel.TBL_BEGENIBLOG1">
-            <End Role="TBLBLOG" EntitySet="TBLBLOG" />
-            <End Role="TBLKULLANICI" EntitySet="TBLKULLANICI" />
-          </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram3">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram3">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram3">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition3" ReturnType="Collection(project_blogModel.sp_helpdiagramdefinition3_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams3" ReturnType="Collection(project_blogModel.sp_helpdiagrams3_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram3">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams3" />
         </EntityContainer>
-        <EntityType Name="TBLHAKKIMIZDA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int16" Nullable="false" />
-          <Property Name="ACIKLAMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TBLILETISIM">
-          <Key>
-            <PropertyRef Name="MESAJID" />
-          </Key>
-          <Property Name="MESAJID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ADSOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MAIL" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="TELEFON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="KONU" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="ICERIK" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="TBLADMIN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KULLANICIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SIFRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <ComplexType Name="sp_helpdiagramdefinition1_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams1_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="TBLKULLANICI">
-          <Key>
-            <PropertyRef Name="KULLANICIID_" />
-          </Key>
-          <Property Name="KULLANICIID_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KULLANICINICK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="KULLANICIAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="KULLANICISOYAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="KULLANICISIFRE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="KULLANICIMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TBLYORUM" Relationship="project_blogModel.FK_TBLYORUM_TBLKULLANICI" FromRole="TBLKULLANICI" ToRole="TBLYORUM" />
-          <NavigationProperty Name="TBLBLOG" Relationship="project_blogModel.TBL_BEGENIBLOG" FromRole="TBLKULLANICI" ToRole="TBLBLOG" />
-        </EntityType>
-        <Association Name="FK_TBLYORUM_TBLKULLANICI">
-          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="1" />
-          <End Type="project_blogModel.TBLYORUM" Role="TBLYORUM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBLKULLANICI">
-              <PropertyRef Name="KULLANICIID_" />
-            </Principal>
-            <Dependent Role="TBLYORUM">
-              <PropertyRef Name="KULLANICIID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TBL_BEGENIBLOG">
-          <End Type="project_blogModel.TBLBLOG" Role="TBLBLOG" Multiplicity="*" />
-          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="*" />
-        </Association>
-        <ComplexType Name="sp_helpdiagramdefinition2_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams2_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <Association Name="TBL_BEGENIBLOG1">
-          <End Type="project_blogModel.TBLBLOG" Role="TBLBLOG" Multiplicity="*" />
-          <End Type="project_blogModel.TBLKULLANICI" Role="TBLKULLANICI" Multiplicity="*" />
-        </Association>
-        <ComplexType Name="sp_helpdiagramdefinition3_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams3_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="project_blogModelStoreContainer" CdmEntityContainer="project_blogEntities1">
-    <EntitySetMapping Name="TBL_TUR">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBL_TUR)">
-        <MappingFragment StoreEntitySet="TBL_TUR">
-          <ScalarProperty Name="TURID" ColumnName="TURID" />
-          <ScalarProperty Name="TURAD" ColumnName="TURAD" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLBLOG">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLBLOG)">
-        <MappingFragment StoreEntitySet="TBLBLOG">
-          <ScalarProperty Name="BLOGID" ColumnName="BLOGID" />
-          <ScalarProperty Name="BLOGBASLIK" ColumnName="BLOGBASLIK" />
-          <ScalarProperty Name="BLOGICERIK" ColumnName="BLOGICERIK" />
-          <ScalarProperty Name="BLOGTARIH" ColumnName="BLOGTARIH" />
-          <ScalarProperty Name="BLOGGORSEL" ColumnName="BLOGGORSEL" />
-          <ScalarProperty Name="BLOGKATEGORİ" ColumnName="BLOGKATEGORİ" />
-          <ScalarProperty Name="BLOGTURID" ColumnName="BLOGTURID" />
-        </MappingFragment>
-              <MappingFragment StoreEntitySet="TBL_TUR" >
-                <ScalarProperty Name="BLOGTURID" ColumnName="TURID" />
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="project_blogModelStoreContainer" CdmEntityContainer="project_blogEntities">
+          <EntitySetMapping Name="TBL_BLOGBEGENI">
+            <EntityTypeMapping TypeName="project_blogModel.TBL_BLOGBEGENI">
+              <MappingFragment StoreEntitySet="TBL_BLOGBEGENI">
+                <ScalarProperty Name="BEGENI_ID" ColumnName="BEGENI_ID" />
+                <ScalarProperty Name="KITAP_ID" ColumnName="KITAP_ID" />
+                <ScalarProperty Name="KULLANICI_ID" ColumnName="KULLANICI_ID" />
               </MappingFragment>
-              <MappingFragment StoreEntitySet="TBLYORUM" >
-                <ScalarProperty Name="BLOGID" ColumnName="KITAPID" />
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_BLOGISTEK">
+            <EntityTypeMapping TypeName="project_blogModel.TBL_BLOGISTEK">
+              <MappingFragment StoreEntitySet="TBL_BLOGISTEK">
+                <ScalarProperty Name="ISTEK_ID" ColumnName="ISTEK_ID" />
+                <ScalarProperty Name="KITAP_ID" ColumnName="KITAP_ID" />
+                <ScalarProperty Name="KULLANICI_ID" ColumnName="KULLANICI_ID" />
               </MappingFragment>
-              <MappingFragment StoreEntitySet="TBLKATEGORI" >
-                <ScalarProperty Name="BLOGKATEGORİ" ColumnName="KATEGORIID" />
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_BLOGOKUNAN">
+            <EntityTypeMapping TypeName="project_blogModel.TBL_BLOGOKUNAN">
+              <MappingFragment StoreEntitySet="TBL_BLOGOKUNAN">
+                <ScalarProperty Name="OKUNUS_ID" ColumnName="OKUNUS_ID" />
+                <ScalarProperty Name="KITAP_ID" ColumnName="KITAP_ID" />
+                <ScalarProperty Name="KULLANICI_ID" ColumnName="KULLANICI_ID" />
               </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLKATEGORI">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLKATEGORI)">
-        <MappingFragment StoreEntitySet="TBLKATEGORI">
-          <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
-          <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLYORUM">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLYORUM)">
-        <MappingFragment StoreEntitySet="TBLYORUM">
-          <ScalarProperty Name="YORUMID" ColumnName="YORUMID" />
-          <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
-          <ScalarProperty Name="YORUM" ColumnName="YORUM" />
-          <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
-          <ScalarProperty Name="PUAN" ColumnName="PUAN" />
-          <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLHAKKIMIZDA">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLHAKKIMIZDA)">
-        <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLILETISIM">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLILETISIM)">
-        <MappingFragment StoreEntitySet="TBLILETISIM">
-          <ScalarProperty Name="MESAJID" ColumnName="MESAJID" />
-          <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
-          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
-          <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
-          <ScalarProperty Name="KONU" ColumnName="KONU" />
-          <ScalarProperty Name="ICERIK" ColumnName="ICERIK" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLADMIN">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLADMIN)">
-        <MappingFragment StoreEntitySet="TBLADMIN">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="KULLANICIADI" ColumnName="KULLANICIADI" />
-          <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TBLKULLANICI">
-      <EntityTypeMapping TypeName="IsTypeOf(project_blogModel.TBLKULLANICI)">
-        <MappingFragment StoreEntitySet="TBLKULLANICI">
-          <ScalarProperty Name="KULLANICIID_" ColumnName="KULLANICIID_" />
-          <ScalarProperty Name="KULLANICINICK" ColumnName="KULLANICINICK" />
-          <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
-          <ScalarProperty Name="KULLANICISOYAD" ColumnName="KULLANICISOYAD" />
-          <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
-          <ScalarProperty Name="KULLANICIMAIL" ColumnName="KULLANICIMAIL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram3" FunctionName="project_blogModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram3" FunctionName="project_blogModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram3" FunctionName="project_blogModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition3" FunctionName="project_blogModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagramdefinition3_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams3" FunctionName="project_blogModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="project_blogModel.sp_helpdiagrams3_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TUR">
+            <EntityTypeMapping TypeName="project_blogModel.TBL_TUR">
+              <MappingFragment StoreEntitySet="TBL_TUR">
+                <ScalarProperty Name="TURID" ColumnName="TURID" />
+                <ScalarProperty Name="TURAD" ColumnName="TURAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLADMIN">
+            <EntityTypeMapping TypeName="project_blogModel.TBLADMIN">
+              <MappingFragment StoreEntitySet="TBLADMIN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram3" FunctionName="project_blogModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams3" FunctionName="project_blogModel.Store.sp_upgraddiagrams" />
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+                <ScalarProperty Name="KULLANICIADI" ColumnName="KULLANICIADI" />
+                <ScalarProperty Name="SIFRE" ColumnName="SIFRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLBLOG">
+            <EntityTypeMapping TypeName="project_blogModel.TBLBLOG">
+              <MappingFragment StoreEntitySet="TBLBLOG">
+                <ScalarProperty Name="BLOGID" ColumnName="BLOGID" />
+                <ScalarProperty Name="BLOGBASLIK" ColumnName="BLOGBASLIK" />
+                <ScalarProperty Name="BLOGICERIK" ColumnName="BLOGICERIK" />
+                <ScalarProperty Name="BLOGTARIH" ColumnName="BLOGTARIH" />
+                <ScalarProperty Name="BLOGGORSEL" ColumnName="BLOGGORSEL" />
+                <ScalarProperty Name="BLOGKATEGORİ" ColumnName="BLOGKATEGORİ" />
+                <ScalarProperty Name="BLOGTURID" ColumnName="BLOGTURID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLHAKKIMIZDA">
+            <EntityTypeMapping TypeName="project_blogModel.TBLHAKKIMIZDA">
+              <MappingFragment StoreEntitySet="TBLHAKKIMIZDA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACIKLAMA" ColumnName="ACIKLAMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLILETISIM">
+            <EntityTypeMapping TypeName="project_blogModel.TBLILETISIM">
+              <MappingFragment StoreEntitySet="TBLILETISIM">
+                <ScalarProperty Name="MESAJID" ColumnName="MESAJID" />
+                <ScalarProperty Name="ADSOYAD" ColumnName="ADSOYAD" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="KONU" ColumnName="KONU" />
+                <ScalarProperty Name="ICERIK" ColumnName="ICERIK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKATEGORI">
+            <EntityTypeMapping TypeName="project_blogModel.TBLKATEGORI">
+              <MappingFragment StoreEntitySet="TBLKATEGORI">
+                <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
+                <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKULLANICI">
+            <EntityTypeMapping TypeName="project_blogModel.TBLKULLANICI">
+              <MappingFragment StoreEntitySet="TBLKULLANICI">
+                <ScalarProperty Name="KULLANICIID_" ColumnName="KULLANICIID_" />
+                <ScalarProperty Name="KULLANICINICK" ColumnName="KULLANICINICK" />
+                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+                <ScalarProperty Name="KULLANICISOYAD" ColumnName="KULLANICISOYAD" />
+                <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
+                <ScalarProperty Name="KULLANICIMAIL" ColumnName="KULLANICIMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLYORUM">
+            <EntityTypeMapping TypeName="project_blogModel.TBLYORUM">
+              <MappingFragment StoreEntitySet="TBLYORUM">
+                <ScalarProperty Name="YORUMID" ColumnName="YORUMID" />
+                <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
+                <ScalarProperty Name="YORUM" ColumnName="YORUM" />
+                <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
+                <ScalarProperty Name="PUAN" ColumnName="PUAN" />
+                <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -670,7 +702,7 @@ warning 6002: The table/view 'project_blog.dbo.TBLADMIN' does not have a primary
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
