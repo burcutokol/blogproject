@@ -24,6 +24,6 @@ namespace BlogProject.Entity
         public virtual ICollection<TBL_BLOGBEGENI> TBL_BLOGBEGENI { get; set; }
         public virtual ICollection<TBL_BLOGISTEK> TBL_BLOGISTEK { get; set; }
         public virtual ICollection<TBL_BLOGOKUNAN> TBL_BLOGOKUNAN { get; set; }
-        public virtual TBLYORUM TBLYORUM { get; set; }
+        public virtual ICollection <TBLYORUM> TBLYORUM { get; set; }
     }
 }

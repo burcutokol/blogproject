@@ -39,6 +39,7 @@ namespace BlogProject
                 {
                     if (Comment.Text != "")
                     {
+                        t.KULLANICIID = User.KULLANICIID_;
                         t.KULLANICIAD = kullaniciNick;
                         t.YORUM = Comment.Text;
                         t.KITAPID = Blog_Id;
@@ -47,6 +48,10 @@ namespace BlogProject
                         Response.Redirect("BlogDetails.Aspx?BLOGID=" + Blog_Id);
                     }
                 }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
             }
               
 

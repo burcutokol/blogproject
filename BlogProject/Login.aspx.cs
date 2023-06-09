@@ -77,25 +77,34 @@ namespace BlogProject
             }
             else
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "ClosePopupScript", "closePopup();", true);
-
-                TBLKULLANICI kullanici = new TBLKULLANICI()
+                try
                 {
-                    KULLANICINICK = kullaniciAdi,
-                    KULLANICIMAIL = email,
-                    KULLANICISIFRE = sifre
-                };
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "ClosePopupScript", "closePopup();", true);
 
-                db.TBLKULLANICI.Add(kullanici);
-                db.SaveChanges();
+                    TBLKULLANICI kullanici = new TBLKULLANICI()
+                    {
+                        KULLANICINICK = kullaniciAdi,
+                        KULLANICIMAIL = email,
+                        KULLANICISIFRE = sifre,
+                        KULLANICIAD = ""
+                    };
 
-               
-                Label2.Text = "Kayıt başarıyla tamamlandı.";
-                Label2.Visible = true;
+                    db.TBLKULLANICI.Add(kullanici);
+                    db.SaveChanges();
+
+
+                    Label2.Text = "Kayıt başarıyla tamamlandı. Giriş sayfasına yönlendiriliyorsunuz...";
+                    Label2.Visible = true;
+                    Response.Redirect("Login.aspx");
+                }
+                catch(Exception ex) 
+                { 
+
+                }
+                
 
             }
-        }//burda
-
+        }
 
 
     }

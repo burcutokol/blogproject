@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlogProject.Entity;
+using System;
+using System.Linq;
 using System.Web.DynamicData;
 using System.Web.UI.WebControls;
 
@@ -55,6 +57,9 @@ namespace BlogProject
                 }
             }
         }
+
+
+    
 
     }
 }

@@ -52,7 +52,7 @@
       <div class="card rounded-3">
         <div class="card-body p-4">
 
-			<h4 class="text-center my-3 pb-3">Okuduğum Kitaplar</h4>
+			<h4 class="text-center my-3 pb-3">Okuma Listesi</h4>
     <form runat="server">
 		<asp:Repeater ID="Repeater2" runat="server">
     <HeaderTemplate>

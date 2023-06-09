@@ -65,9 +65,7 @@
          <div class="clear"></div>
       </div>
    </div>
-   <div class="right-side-forget">
-      <a href="#" class="for">Şifremi Unuttum</a>
-   </div>
+ 
    <div class="clear"></div>
    <div class="btnn">
       <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary submit" Text="Giriş Yap" OnClick="Button1_Click" UseSubmitBehavior=false />
