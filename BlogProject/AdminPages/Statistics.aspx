@@ -21,13 +21,10 @@
 
             </td>
             <td>
-               En Fazla Beğenilen Blog <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+               Toplam Kullanıcı Sayısı : <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
 
             </td>
-            <td>
-               Toplam Blog Sayısı <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-
-            </td>
+            
         </tr>
     </table>
 </asp:Content>

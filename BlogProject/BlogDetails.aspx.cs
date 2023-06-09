@@ -30,15 +30,25 @@ namespace BlogProject
         {
             int Blog_Id = Convert.ToInt32(Request.QueryString["BLOGID"]);
             TBLYORUM t = new TBLYORUM();
-            if (Name.Text != "" && Mail.Text != "" && Comment.Text != "")
+           
+            if (Session["KULLANICINICK"] != null)
             {
-                t.KULLANICIAD = Name.Text;
-                t.YORUM = Comment.Text;
-                t.KITAPID = Blog_Id;
-                db.TBLYORUM.Add(t); //Db'nin TBLYORUM tablosuna yeni t objesini ekledim.
-                db.SaveChanges();
-                Response.Redirect("BlogDetails.Aspx?BLOGID=" + Blog_Id);
+                string kullaniciNick = Session["KULLANICINICK"] as string;
+                var User = db.TBLKULLANICI.FirstOrDefault(user => user.KULLANICINICK == kullaniciNick);
+                if (User != null)
+                {
+                    if (Comment.Text != "")
+                    {
+                        t.KULLANICIAD = kullaniciNick;
+                        t.YORUM = Comment.Text;
+                        t.KITAPID = Blog_Id;
+                        db.TBLYORUM.Add(t); //Db'nin TBLYORUM tablosuna yeni t objesini ekledim.
+                        db.SaveChanges();
+                        Response.Redirect("BlogDetails.Aspx?BLOGID=" + Blog_Id);
+                    }
+                }
             }
+              
 
         }
 

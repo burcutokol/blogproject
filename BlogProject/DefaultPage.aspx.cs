@@ -59,6 +59,10 @@ namespace BlogProject
             latestcomments.DataSource = LatestComments;
             latestcomments.DataBind();
 
+            var LatestBlogs = db.TBLBLOG.OrderByDescending(x => x.BLOGTARIH).ToList().Take(5);
+            latestblogs.DataSource = LatestBlogs;
+            latestblogs.DataBind();
+
             int BlogId = Convert.ToInt32(Request.QueryString["BlogId"]);
             var Blog = db.TBLBLOG.Find(BlogId);
 

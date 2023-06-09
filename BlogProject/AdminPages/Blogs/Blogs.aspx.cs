@@ -10,13 +10,13 @@ namespace BlogProject.AdminPages
         project_blogEntities db = new project_blogEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["KULLANICIADI"] == null)
+            if (Session["KULLANICINICK"] == null)
             {
                 Response.Redirect("~/Login.aspx");
             }
             else
             {
-                Response.Write("Hoşgeldiniz" + Session["KULLANICIADI"].ToString()); //yönlendirilecek sayfa
+                Response.Write("Hoşgeldiniz" + Session["KULLANICINICK"].ToString()); //yönlendirilecek sayfa
             }
             Repeater1.DataSource = db.TBLBLOG.ToList();
             Repeater1.DataBind();

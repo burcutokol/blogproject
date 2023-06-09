@@ -98,15 +98,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="content-form">
                         <h3>Bir Yorum Yazın.</h3>
 
-                            <asp:TextBox ID="Name" runat="server"
-                                placeholder = "Adınız">
-                            </asp:TextBox>
-                            <asp:TextBox ID="Mail" runat="server"
-                                placeholder = "Mail Adresiniz">
-                            </asp:TextBox>
-                            <asp:TextBox ID="Comment" runat="server" TextMode="MultiLine" Height="100"
-                                placeholder = "Yorumunuz">
-                            </asp:TextBox>
+
+                            <asp:TextBox ID="Comment" runat="server" TextMode="MultiLine" Height="100px" Width="99%" placeholder="Yorumunuz"></asp:TextBox>
+
                             <asp:Button ID="btnSave" runat="server" Text="Yorum Yap" OnClick="Button1_Click" />
                             
 

@@ -19,6 +19,7 @@ namespace BlogProject
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            
             var userQuery = from x in db.TBLKULLANICI
                             where x.KULLANICINICK == userName.Text
                             && x.KULLANICISIFRE == password.Text
@@ -27,13 +28,15 @@ namespace BlogProject
             {
                 Session.Add("KULLANICINICK", userName.Text); //Yönlenen sayfada kontrol et
 
-                if (!string.IsNullOrEmpty(userName.Text))
+                if (userName.Text == "SUPERVISOR")
                 {
-                    Response.Redirect("DefaultPagewAccount.aspx");
+                    Session.Add("KULLANICINICK", userName.Text);
+                    Response.Redirect("/AdminPages/Blogs/Blogs.aspx");
                 }
                 else
                 {
-                    Response.Redirect("DefaultPage.aspx");
+                    Session.Add("KULLANICINICK", userName.Text);
+                    Response.Redirect("DefaultPagewAccount.aspx");
                 }
             }
             else
