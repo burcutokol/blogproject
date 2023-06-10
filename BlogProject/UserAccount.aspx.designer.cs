@@ -78,6 +78,15 @@ namespace BlogProject
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
+        /// btnQuit denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik olarak oluşturulan alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnQuit;
+
+        /// <summary>
         /// Repeater2 denetimi.
         /// </summary>
         /// <remarks>

@@ -72,9 +72,10 @@
                    
                     <div class="mt-5 text-right">
                         <asp:Button ID="Button1" runat="server" Text="Değişiklikleri Kaydet" CssClass="btn btn-primary profile-button" OnClick="Button1_Click"/>
-                       
+                       <asp:Button ID="btnQuit" runat="server" Text="Çıkış Yap" CssClass="btn btn-danger profile-button" OnClick="btnQuit_Click" />
 
                     </div>
+                        
 
                         <div class="container rounded bg-white mt-5">
         <div class="row">

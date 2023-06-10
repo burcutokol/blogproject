@@ -89,8 +89,12 @@ namespace BlogProject
                 }
 
                 }
-            
-            
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+
         }
         protected void btnRead_Click(object sender, EventArgs e)
         {
@@ -123,6 +127,10 @@ namespace BlogProject
                 }
 
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
         protected void btnReadingList_Click(object sender, EventArgs e)
         {
@@ -154,6 +162,10 @@ namespace BlogProject
 
                 }
 
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
             }
         }
 

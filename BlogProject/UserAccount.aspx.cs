@@ -122,7 +122,18 @@ namespace BlogProject
             Response.Redirect("UserAccount.aspx");
         }
 
+        protected void btnQuit_Click(object sender, EventArgs e)
+        {
+            if (Session["KULLANICINICK"] != null)
+            {
+                // Oturumu sonlandır
+                Session.Clear();
+                Session.Abandon();
 
-
+                // Varsayılan sayfaya yönlendir
+                Response.Redirect("DefaultPage.aspx");
+            }
+                
+        }
     }
 }
