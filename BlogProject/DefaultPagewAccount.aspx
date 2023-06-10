@@ -24,7 +24,7 @@
 				  <div class="menu"> </div> 
 				   <ul class="d-flex align-items-center" style="justify-content: center;">
                        <li class="active"><a href="ReadingList.aspx">Okuma Listem</a></li>
-						<li class="active"><a href="Default.aspx">Bloglar</a></li>						
+						<li class="active"><a href="DefaultPage.aspx">Bloglar</a></li>						
 						<li><a href="AboutPage.aspx">Hakkımızda</a></li>	
 						<li><a href="Contact.aspx">İletişim</a></li>						
 				 </ul>

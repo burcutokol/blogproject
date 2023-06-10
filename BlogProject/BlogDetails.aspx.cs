@@ -68,7 +68,7 @@ namespace BlogProject
                     if (User != null)
                     {
                         TBLBLOG blog = db.TBLBLOG.FirstOrDefault(b => b.BLOGID == Blog_Id);
-                    bool alreadyLiked = db.TBL_BLOGOKUNAN.Any(x => x.KULLANICI_ID == User.KULLANICIID_ && x.KITAP_ID == blog.BLOGID);
+                    bool alreadyLiked = db.TBL_BLOGBEGENI.Any(x => x.KULLANICI_ID == User.KULLANICIID_ && x.KITAP_ID == blog.BLOGID);
                     TBL_BLOGBEGENI t = new TBL_BLOGBEGENI
                         {
                             KULLANICI_ID = User.KULLANICIID_,
